@@ -1070,7 +1070,7 @@ public interface ZLMApi extends Library {
      * 克隆mk_publish_auth_invoker对象，通过克隆对象为堆对象，可以实现跨线程异步执行mk_publish_auth_invoker_do
      * 如果是同步执行mk_publish_auth_invoker_do，那么没必要克隆对象
      */
-    MK_PUBLISH_AUTH_INVOKER mk_publish_auth_invoker_clone(MK_PUBLISH_AUTH_INVOKER ctx);
+     void  mk_publish_auth_invoker_do2(MK_PUBLISH_AUTH_INVOKER ctx, String err_msg, MK_INI option);
 
     /**
      * 销毁堆上的克隆对象
