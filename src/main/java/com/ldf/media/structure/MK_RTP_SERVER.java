@@ -9,7 +9,7 @@ import com.sun.jna.Pointer;
  * @since 2023/11/23
  **/
 public class MK_RTP_SERVER extends SdkStructure{
-
+    public int dwSize;
     public MK_RTP_SERVER(Pointer pointer) {
         super(pointer);
     }

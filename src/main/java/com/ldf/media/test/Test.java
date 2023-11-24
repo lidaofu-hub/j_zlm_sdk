@@ -13,7 +13,10 @@ import com.sun.jna.Pointer;
  * @since 2023/11/23
  **/
 public class Test {
+    //Windows环境测试
     public static ZLMApi ZLM_API = Native.load("D:\\ZLMediaKit\\source\\out\\install\\x64-Debug\\bin\\mk_api.dll", ZLMApi.class);
+    //Linux环境测试
+    //public static ZLMApi ZLM_API = Native.load("/usr/local/zlm/libmk_api.so", ZLMApi.class);
 
     public static void main(String[] args) throws InterruptedException {
         MK_INI mkIni = ZLM_API.mk_ini_default();
@@ -24,6 +27,9 @@ public class Test {
         };
         mkEvents.on_mk_media_no_reader= sender -> {
             System.out.println("这里是无人观看回调通知");
+        };
+        mkEvents.on_mk_media_publish= (url_info, invoker, sender) -> {
+            ZLM_API.mk_publish_auth_invoker_do(invoker,"0",0,0);
         };
         ZLM_API.mk_events_listen(mkEvents);
         //Pointer iniPointer = ZLM_API.mk_ini_dump_string(mkIni);
@@ -38,6 +44,8 @@ public class Test {
 
         //创建mk代理
         MK_PROXY_PLAYER mk_proxy = ZLM_API.mk_proxy_player_create("__defaultVhost__", "live", "test", 0, 0);
+        ZLM_API.mk_proxy_player_set_option(mk_proxy,"enable_rtsp","0");
+        ZLM_API.mk_proxy_player_set_option(mk_proxy,"enable_fmp4","0");
         //开始播放
         IMKProxyPlayCloseCallBack imkProxyPlayCloseCallBack = new IMKProxyPlayCloseCallBack() {
             @Override
@@ -47,6 +55,11 @@ public class Test {
         };
         ZLM_API.mk_proxy_player_play(mk_proxy, "rtsp://admin:telit123@172.16.6.236/h264/ch1/main/av_stream");
         ZLM_API.mk_proxy_player_set_on_close(mk_proxy, imkProxyPlayCloseCallBack, mk_proxy.getPointer());
+
+        MK_MEDIA_SOURCE mkMediaSource = ZLM_API.mk_media_source_find2("rtmp", "__defaultVhost__", "live", "test", 0);
+        if (mkMediaSource!=null){
+            System.out.println("已找到media资源:"+ZLM_API.mk_media_source_get_stream(mkMediaSource));
+        }
 
         Thread.sleep(10000L);
         Thread.sleep(30000L);

@@ -15,4 +15,7 @@ public class MK_MEDIA_INFO extends SdkStructure{
     }
     public MK_MEDIA_INFO() {
     }
+
+
+
 }

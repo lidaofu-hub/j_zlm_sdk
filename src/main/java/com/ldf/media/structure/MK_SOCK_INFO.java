@@ -9,7 +9,7 @@ import com.sun.jna.Pointer;
  * @since 2023/11/23
  **/
 public class MK_SOCK_INFO extends SdkStructure{
-
+    public int dwSize;
     public MK_SOCK_INFO(Pointer pointer) {
         super(pointer);
     }

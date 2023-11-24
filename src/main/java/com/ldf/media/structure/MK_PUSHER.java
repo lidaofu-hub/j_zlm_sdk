@@ -9,6 +9,7 @@ import com.sun.jna.Pointer;
  * @since 2023/11/23
  **/
 public class MK_PUSHER extends SdkStructure{
+    public int dwSize;
     public MK_PUSHER(Pointer pointer) {
         super(pointer);
     }
