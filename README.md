@@ -13,3 +13,5 @@
     - callback：对应C Api中回调
     - structure：对应C Api中结构体 注意由于C Api中结构体为空，所以dwSize为添加的默认参数，否则运行会报错
     - test：为该工程为演示/测试程序，测试可以跑在Windows10_x64、Ubuntu22.04.2LTS_x64、CentOs7.9_x64，其他环境请编译对应的链接库测试下。
+## 学习探讨
+    wx：L746101210
