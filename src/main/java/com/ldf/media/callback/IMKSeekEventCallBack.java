@@ -14,5 +14,5 @@ public interface IMKSeekEventCallBack extends Callback {
      * @param stamp_ms seek至的时间轴位置，单位毫秒
      * @return 1代表将处理seek请求，0代表忽略该请求
      */
-    public void invoke(Pointer user_data, int stamp_ms);
+    public int invoke(Pointer user_data, int stamp_ms);
 }
