@@ -50,7 +50,7 @@ public class Test {
         //创建rtmp服务器 0:失败,非0:端口号
         short rtmp_server_port  = ZLM_API.mk_rtmp_server_start((short) 7935, 0);
         //创建拉流代理
-        MK_PROXY_PLAYER mk_proxy = ZLM_API.mk_proxy_player_create("__defaultVhost__", "live", "test", 0, 0,0,0,1,1);
+        MK_PROXY_PLAYER mk_proxy = ZLM_API.mk_proxy_player_create("__defaultVhost__", "live", "test", 0, 0);
         //回调关闭时间
         IMKProxyPlayCloseCallBack imkProxyPlayCloseCallBack = new IMKProxyPlayCloseCallBack() {
             @Override
