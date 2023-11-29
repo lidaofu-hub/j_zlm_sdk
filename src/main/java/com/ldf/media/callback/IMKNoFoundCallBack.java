@@ -19,5 +19,5 @@ public interface IMKNoFoundCallBack extends Callback {
      * @return 1 直接关闭
      * 0 等待流注册
      */
-    public void invoke(MK_MEDIA_INFO url_info, MK_SOCK_INFO sender);
+    public int invoke(MK_MEDIA_INFO url_info, MK_SOCK_INFO sender);
 }

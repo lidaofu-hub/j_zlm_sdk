@@ -569,6 +569,57 @@ public interface ZLMApi extends Library {
     MK_THREAD mk_media_get_owner_thread(MK_MEDIA ctx);
 
     /*******************************推流相关**********************************/
+    /*
+     * 获取track 编码codec类型，请参考MKCodecXXX定义
+     */
+    int mk_track_codec_id(MK_TRACK track);
+
+    /**
+     * 获取编码codec名称
+     */
+    String mk_track_codec_name(MK_TRACK track);
+
+    /**
+     * 获取比特率信息
+     */
+    int mk_track_bit_rate(MK_TRACK track);
+
+    /**
+     * track是否为视频
+     */
+    int mk_track_is_video(MK_TRACK track);
+
+    /**
+     * 获取视频宽度
+     */
+    int mk_track_video_width(MK_TRACK track);
+
+    /**
+     * 获取视频高度
+     */
+    int mk_track_video_height(MK_TRACK track);
+
+    /**
+     * 获取视频帧率
+     */
+    int mk_track_video_fps(MK_TRACK track);
+
+    /**
+     * 获取音频采样率
+     */
+    int mk_track_audio_sample_rate(MK_TRACK track);
+
+    /**
+     * 获取音频通道数
+     */
+    int mk_track_audio_channel(MK_TRACK track);
+
+    /**
+     * 获取音频位数，一般为16bit
+     */
+    int mk_track_audio_sample_bit(MK_TRACK track);
+
+    /*******************************推流相关**********************************/
 
 
     /**
@@ -1070,7 +1121,7 @@ public interface ZLMApi extends Library {
      * 克隆mk_publish_auth_invoker对象，通过克隆对象为堆对象，可以实现跨线程异步执行mk_publish_auth_invoker_do
      * 如果是同步执行mk_publish_auth_invoker_do，那么没必要克隆对象
      */
-     void  mk_publish_auth_invoker_do2(MK_PUBLISH_AUTH_INVOKER ctx, String err_msg, MK_INI option);
+    void mk_publish_auth_invoker_do2(MK_PUBLISH_AUTH_INVOKER ctx, String err_msg, MK_INI option);
 
     /**
      * 销毁堆上的克隆对象

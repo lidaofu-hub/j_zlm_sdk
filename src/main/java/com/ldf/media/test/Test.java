@@ -14,22 +14,26 @@ import com.sun.jna.Pointer;
  **/
 public class Test {
     //Windows环境测试
-    public static ZLMApi ZLM_API = Native.load("D:\\ZLMediaKit\\source\\out\\install\\x64-Debug\\bin\\mk_api.dll", ZLMApi.class);
+    public static ZLMApi ZLM_API = Native.load("D:\\ZLMediaKit\\source\\release\\windows\\Debug\\mk_api.dll", ZLMApi.class);
     //Linux环境测试
-    //public static ZLMApi ZLM_API = Native.load("/usr/local/zlm/libmk_api.so", ZLMApi.class);
+    //public static ZLMApi ZLM_API = Native.load("/opt/media/libmk_api.so", ZLMApi.class);
 
     public static void main(String[] args) throws InterruptedException {
         //初始化环境配置
         MK_INI mkIni = ZLM_API.mk_ini_default();
         //配置参数 打开自动关流
-        ZLM_API.mk_ini_set_option_int(mkIni, "protocol.auto_close", 1);
+       // ZLM_API.mk_ini_set_option_int(mkIni, "protocol.auto_close", 1);
+        //ZLM_API.mk_ini_set_option_int(mkIni,"protocol.enable_fmp4",0);
+       // ZLM_API.mk_ini_set_option_int(mkIni,"protocol.enable_hls",0);
+       // ZLM_API.mk_ini_set_option_int(mkIni,"protocol.enable_ts",0);
         //全局回调
         MK_EVENTS mkEvents = new MK_EVENTS();
         mkEvents.on_mk_media_changed= (regist, sender) -> {
-            System.out.println("这里是流改变回调通知");
+            System.out.println("这里是流改变回调通知:"+regist);
         };
         mkEvents.on_mk_media_no_reader= sender -> {
             System.out.println("这里是无人观看回调通知");
+            ZLM_API.mk_media_source_close(sender,1);
         };
         mkEvents.on_mk_media_publish= (url_info, invoker, sender) -> {
             ZLM_API.mk_publish_auth_invoker_do(invoker,"0",0,0);
@@ -46,10 +50,7 @@ public class Test {
         //创建rtmp服务器 0:失败,非0:端口号
         short rtmp_server_port  = ZLM_API.mk_rtmp_server_start((short) 7935, 0);
         //创建拉流代理
-        MK_PROXY_PLAYER mk_proxy = ZLM_API.mk_proxy_player_create("__defaultVhost__", "live", "test", 0, 0);
-        ZLM_API.mk_proxy_player_set_option(mk_proxy,"enable_rtsp","0");
-        ZLM_API.mk_proxy_player_set_option(mk_proxy,"enable_fmp4","0");
-
+        MK_PROXY_PLAYER mk_proxy = ZLM_API.mk_proxy_player_create("__defaultVhost__", "live", "test", 0, 0,0,0,1,1);
         //回调关闭时间
         IMKProxyPlayCloseCallBack imkProxyPlayCloseCallBack = new IMKProxyPlayCloseCallBack() {
             @Override
@@ -63,8 +64,8 @@ public class Test {
         //添加代理关闭回调 并把代理客户端传过去释放
         ZLM_API.mk_proxy_player_set_on_close(mk_proxy, imkProxyPlayCloseCallBack, mk_proxy.getPointer());
 
-        //阻塞30s
-        Thread.sleep(30000L);
+        //阻塞60s
+        Thread.sleep(60000L);
         //停止所有服务器
         ZLM_API.mk_stop_all_server();
     }
