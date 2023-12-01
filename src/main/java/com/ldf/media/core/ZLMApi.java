@@ -39,11 +39,34 @@ public interface ZLMApi extends Library {
 
 
     /**
+     * 创建ini配置对象
+     */
+    MK_INI mk_ini_create();
+
+    /**
      * 返回全局默认ini配置
      *
      * @return 全局默认ini配置，请勿用mk_ini_release释放它
      */
     MK_INI mk_ini_default();
+
+
+    /**
+     * 加载ini配置文件内容
+     *
+     * @param ini ini对象
+     * @param str 配置文件内容
+     */
+    void mk_ini_load_string(MK_INI ini, String str);
+
+    /**
+     * 加载ini配置文件
+     *
+     * @param ini  ini对象
+     * @param file 配置文件路径
+     */
+    void mk_ini_load_file(MK_INI ini, String file);
+
 
     /**
      * 销毁ini配置对象
@@ -57,7 +80,6 @@ public interface ZLMApi extends Library {
      * @return 配置文件内容字符串，用完后需要自行mk_free
      */
     Pointer mk_ini_dump_string(MK_INI ini);
-
 
     /**
      * 添加或覆盖配置项
