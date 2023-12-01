@@ -7,12 +7,14 @@
 
 ## 项目组成
 1. 本项目拉取基于2023-11-23 master分支编译开发
-2. 本项目不包含所需的动态链接库mk_api.dll\libmk_api.so 请拉取对应版本编译(或使用[JMediaServer ](https://github.com/lidaofu-hub/j_media_server)项目中/resource/lib下)
+2. 本项目不包含所需的动态链接库mk_api.dll\libmk_api.so 请拉取对应版本编译(或使用[JMediaServer ](https://github.com/lidaofu-hub/j_media_server)项目中/resource/win32-x86-64&/resource/linux-x86-64下)
 3. 本项目包含core、callback、structure、test模块
     - core：为核心模块，封装常用大部分API，如有没有添加想要的，可以添加对应的API到ZLMApi
     - callback：对应C Api中回调
     - structure：对应C Api中结构体 注意由于C Api中结构体为空，所以dwSize为添加的默认参数，否则运行会报错
     - test：为该工程为演示/测试程序，测试可以跑在Windows10_x64、Ubuntu22.04.2LTS_x64、CentOs7.9_x64，其他环境请编译对应的链接库测试下。
 4. 具体如何集成到项目可以参考[JMediaServer ](https://github.com/lidaofu-hub/j_media_server)
+## 常见问题
+1. 在windows环境运行出现java.lang.UnsatisfiedLinkError问题，请安装openssl库 参见[OpenSSL下载 ](https://slproweb.com/products/Win32OpenSSL.html)
 ## 学习探讨
     wx：L746101210
