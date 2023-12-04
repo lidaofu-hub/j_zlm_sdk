@@ -22,6 +22,7 @@
 
 1. 本项目拉取基于 2023-11-23 master 分支编译开发
 2. 本项目不包含所需的动态链接库 mk_api.dll\libmk_api.so 请拉取对应版本编译(或使用[JMediaServer](https://github.com/lidaofu-hub/j_media_server)项目中/resource/win32-x86-64&/resource/linux-x86-64 下)
+3. 相关配置项及翻译在resources/conf.ini中，配置方式参见示例代码，或者导入配置文件
 3. 本项目包含 core、callback、structure、test 模块
 - **core**：为核心模块，封装常用大部分 API，如有没有添加想要的，可以添加对应的 API 到 ZLMApi
 - **callback**：对应 C Api 中回调
@@ -42,7 +43,7 @@ public class Test {
     public static void main(String[] args) throws InterruptedException {
         //初始化环境配置
         MK_INI mkIni = ZLM_API.mk_ini_default();
-        //配置参数 打开自动关流
+        //配置参数 打开自动关流 对应conf.ini中配置[protocol] auto_close
         ZLM_API.mk_ini_set_option_int(mkIni, "protocol.auto_close", 1);
         ZLM_API.mk_ini_set_option_int(mkIni,"protocol.enable_fmp4",0);
         ZLM_API.mk_ini_set_option_int(mkIni,"protocol.enable_hls",0);

@@ -23,7 +23,7 @@ public class Test {
     public static void main(String[] args) throws InterruptedException {
         //初始化环境配置
         MK_INI mkIni = ZLM_API.mk_ini_default();
-        //配置参数 打开自动关流
+        //配置参数 打开自动关流 对应conf.ini中配置[protocol] auto_close
         ZLM_API.mk_ini_set_option_int(mkIni, "protocol.auto_close", 1);
         ZLM_API.mk_ini_set_option_int(mkIni,"protocol.enable_fmp4",0);
         ZLM_API.mk_ini_set_option_int(mkIni,"protocol.enable_hls",0);
