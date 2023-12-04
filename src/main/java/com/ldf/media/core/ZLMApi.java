@@ -82,6 +82,15 @@ public interface ZLMApi extends Library {
     Pointer mk_ini_dump_string(MK_INI ini);
 
     /**
+     * 导出配置文件到文件
+     *
+     * @param ini  配置对象
+     * @param file 配置文件路径
+     */
+    void mk_ini_dump_file(MK_INI ini, String file);
+
+
+    /**
      * 添加或覆盖配置项
      *
      * @param ini   配置对象
