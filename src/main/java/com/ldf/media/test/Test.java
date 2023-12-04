@@ -7,12 +7,14 @@ import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 
 /**
- * 1
+ * 测试程序  展示了服务器配置 系统配置 流媒体服务启动 回调监听  拉流代理
  *
  * @author lidaofu
  * @since 2023/11/23
  **/
 public class Test {
+    //动态链接库放在/resource/win32-x86-64&/resource/linux-x86-64下JNA会自动查找目录
+    //public static ZLMApi ZLM_API = Native.load("mk_api", ZLMApi.class);
     //Windows环境测试
     public static ZLMApi ZLM_API = Native.load("D:\\ZLMediaKit\\source\\release\\windows\\Debug\\mk_api.dll", ZLMApi.class);
     //Linux环境测试
@@ -22,10 +24,10 @@ public class Test {
         //初始化环境配置
         MK_INI mkIni = ZLM_API.mk_ini_default();
         //配置参数 打开自动关流
-       // ZLM_API.mk_ini_set_option_int(mkIni, "protocol.auto_close", 1);
-        //ZLM_API.mk_ini_set_option_int(mkIni,"protocol.enable_fmp4",0);
-       // ZLM_API.mk_ini_set_option_int(mkIni,"protocol.enable_hls",0);
-       // ZLM_API.mk_ini_set_option_int(mkIni,"protocol.enable_ts",0);
+        ZLM_API.mk_ini_set_option_int(mkIni, "protocol.auto_close", 1);
+        ZLM_API.mk_ini_set_option_int(mkIni,"protocol.enable_fmp4",0);
+        ZLM_API.mk_ini_set_option_int(mkIni,"protocol.enable_hls",0);
+        ZLM_API.mk_ini_set_option_int(mkIni,"protocol.enable_ts",0);
         //全局回调
         MK_EVENTS mkEvents = new MK_EVENTS();
         mkEvents.on_mk_media_changed= (regist, sender) -> {
