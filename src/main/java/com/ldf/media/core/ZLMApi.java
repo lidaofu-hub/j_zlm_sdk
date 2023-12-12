@@ -245,6 +245,9 @@ public interface ZLMApi extends Library {
      */
     MK_PROXY_PLAYER mk_proxy_player_create(String vhost, String app, String stream, int hls_enabled, int mp4_enabled);
 
+    //MK_PROXY_PLAYER mk_proxy_player_create(String vhost, String app, String stream, int hls_enabled, int mp4_enabled, int fmp4_enabled, int ts_enabled, int rtmp_enabled, int rtsp_enabled);
+
+
     /**
      * 销毁代理播放器
      *
@@ -1294,6 +1297,131 @@ public interface ZLMApi extends Library {
      * 销毁堆上的克隆对象
      */
     void mk_auth_invoker_clone_release(MK_AUTH_INVOKER ctx);
+
+
+    /*******************************帧流相关**********************************/
+
+    /**
+     * 创建frame对象，并返回其引用
+     *
+     * @param codec_id  编解码类型，请参考MKCodecXXX定义
+     * @param dts       解码时间戳，单位毫秒
+     * @param pts       显示时间戳，单位毫秒
+     * @param data      单帧数据
+     * @param size      单帧数据长度
+     * @param cb        data指针free释放回调, 如果为空，内部会拷贝数据
+     * @param user_data data指针free释放回调用户指针
+     * @return frame对象引用
+     */
+    MK_FRAME mk_frame_create(int codec_id, long dts, long pts, Pointer data, long size,
+                             IMKFrameDataRelease cb, Pointer user_data);
+
+    MK_FRAME mk_frame_create2(int codec_id, long dts, long pts, Pointer data, long size,
+                              IMKFrameDataRelease cb, Pointer user_data, IMKFreeUserDataCallBack user_data_free);
+
+    /**
+     * 减引用frame对象
+     *
+     * @param frame 帧对象引用
+     */
+    void mk_frame_unref(MK_FRAME frame);
+
+    /**
+     * 引用frame对象
+     *
+     * @param frame 被引用的frame对象
+     * @return 新的对象引用
+     */
+    MK_FRAME mk_frame_ref(MK_FRAME frame);
+
+    /**
+     * 获取frame 编码codec类型，请参考MKCodecXXX定义
+     */
+    int mk_frame_codec_id(MK_FRAME frame);
+
+    /**
+     * 获取帧编码codec名称
+     */
+    String mk_frame_codec_name(MK_FRAME frame);
+
+    /**
+     * 帧是否为视频
+     */
+    int mk_frame_is_video(MK_FRAME frame);
+
+    /**
+     * 获取帧数据指针
+     */
+    String mk_frame_get_data(MK_FRAME frame);
+
+    /**
+     * 获取帧数据指针长度
+     */
+    long mk_frame_get_data_size(MK_FRAME frame);
+
+    /**
+     * 返回帧数据前缀长度，譬如H264/H265前缀一般是0x00 00 00 01,那么本函数返回4
+     */
+    long mk_frame_get_data_prefix_size(MK_FRAME frame);
+
+    /**
+     * 获取解码时间戳，单位毫秒
+     */
+    long mk_frame_get_dts(MK_FRAME frame);
+
+    /**
+     * 获取显示时间戳，单位毫秒
+     */
+    long mk_frame_get_pts(MK_FRAME frame);
+
+    /**
+     * 获取帧flag，请参考 MK_FRAME_FLAG
+     */
+    int mk_frame_get_flags(MK_FRAME frame);
+
+
+    /**
+     * mpeg-ps/ts 打包器
+     *
+     * @param cb        打包回调函数
+     * @param user_data 回调用户数据指针
+     * @param is_ps     是否是ps
+     * @return 打包器对象
+     */
+    MK_MPEG_MUXER mk_mpeg_muxer_create(IMKMpegMuxerFrameCallBack cb, Pointer user_data, int is_ps);
+
+    /**
+     * 删除mpeg-ps/ts 打包器
+     *
+     * @param ctx 打包器
+     */
+    void mk_mpeg_muxer_release(MK_MPEG_MUXER ctx);
+
+    /**
+     * 添加音视频track
+     *
+     * @param ctx   mk_mpeg_muxer对象
+     * @param track mk_track对象，音视频轨道
+     */
+    void mk_mpeg_muxer_init_track(MK_MPEG_MUXER ctx, MK_TRACK track);
+
+    /**
+     * 初始化track完毕后调用此函数，
+     * 在单track(只有音频或视频)时，因为ZLMediaKit不知道后续是否还要添加track，所以会多等待3秒钟
+     * 如果产生的流是单Track类型，请调用此函数以便加快流生成速度，当然不调用该函数，影响也不大(会多等待3秒)
+     *
+     * @param ctx 对象指针
+     */
+    void mk_mpeg_muxer_init_complete(MK_MPEG_MUXER ctx);
+
+    /**
+     * 输入frame对象
+     *
+     * @param ctx   mk_mpeg_muxer对象
+     * @param frame 帧对象
+     * @return 1代表成功，0失败
+     */
+    int mk_mpeg_muxer_input_frame(MK_MPEG_MUXER ctx, MK_FRAME frame);
 
 
 }
