@@ -1,6 +1,8 @@
+# 📌 zlm4j 📌
+[![star](https://gitee.com/aizuda/zlm4j/badge/star.svg?theme=white)](https://gitee.com/aizuda/zlm4j/stargazers)  [![fork](https://gitee.com/aizuda/zlm4j/badge/fork.svg?theme=white)](https://gitee.com/aizuda/zlm4j/members)
 ## 😁项目简介
 
-**开源流媒体服务框架 ZLMediaKit C Api 的 Java 实现**
+**zlm4j开源流媒体服务框架 ZLMediaKit C Api 的 Java 实现**
 
 感谢 [@夏楚](https://github.com/xia-chu) 提供了这么好的开源流媒体服务框架[ZLMediaKit ](https://github.com/ZLMediaKit/ZLMediaKit)
 
@@ -97,14 +99,14 @@ public class Test {
 
 ## 😁集成项目
 
-1. 可直接复制代码到自己的项目中，方便修改参数
+1. 可直接复制代码到自己的项目中，方便修改参数进行二次开发
 
 2. 由于此项目暂未发布到中央仓库，可以下载此项目然后打包到本地仓库（mvn install）然后项目引入
 
 ``` xml
         <dependency>
-            <groupId>com.ldf</groupId>
-            <artifactId>j-zlm-sdk</artifactId>
+            <groupId>com.aizuda</groupId>
+            <artifactId>zlm4j</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 ```
