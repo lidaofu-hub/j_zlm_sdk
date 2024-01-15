@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://www.easyretry.com">
+  <a >
    <img alt="zlm4j-Logo" src="doc/images/logo.jpg" width="350px">
   </a>
 </p>
@@ -149,4 +149,8 @@ public class Test {
 
 ## 😁学习探讨
 
-    wx：L746101210
+ <p align="center">
+  <a >
+   <img alt="zlm4j-qun" src="doc/images/qun.jpg" width="350px">
+  </a>
+</p>
