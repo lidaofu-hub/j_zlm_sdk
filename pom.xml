@@ -6,7 +6,7 @@
 
     <groupId>com.aizuda</groupId>
     <artifactId>zlm4j</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.1</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
