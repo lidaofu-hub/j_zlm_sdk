@@ -245,7 +245,16 @@ public interface ZLMApi extends Library {
      */
     MK_PROXY_PLAYER mk_proxy_player_create(String vhost, String app, String stream, int hls_enabled, int mp4_enabled);
 
-    //MK_PROXY_PLAYER mk_proxy_player_create(String vhost, String app, String stream, int hls_enabled, int mp4_enabled, int fmp4_enabled, int ts_enabled, int rtmp_enabled, int rtsp_enabled);
+    /**
+     * 创建一个代理播放器
+     *
+     * @param vhost  虚拟主机名，一般为__defaultVhost__
+     * @param app    应用名
+     * @param stream 流名
+     * @param option ProtocolOption相关配置
+     * @return 对象指针
+     */
+    MK_PROXY_PLAYER mk_proxy_player_create2(String vhost, String app, String stream, MK_INI option);
 
 
     /**
