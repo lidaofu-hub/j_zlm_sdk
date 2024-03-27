@@ -162,6 +162,7 @@ public class Test {
 ## 😁常见问题
 
 1. 在 windows 环境运行出现 java.lang.UnsatisfiedLinkError 问题，请安装 openssl 库 参见[OpenSSL 下载 ](https://slproweb.com/products/Win32OpenSSL.html) 或者复制libssl-3-x64.dll&libcrypto-3-x64.dll到系统动态链接库下
+2. macos编译命令`cmake .. -DENABLE_TESTS=false -DCMAKE_BUILD_TYPE=Release && cmak -j 10`，编译完后将`ZLMediaKit/.../release/...`文件夹中的`libmk_api.dylib`动态库复制到`response/darwin-x86-64`目录下即可
 
 ## 😁学习探讨
 
