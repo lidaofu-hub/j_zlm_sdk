@@ -1077,6 +1077,18 @@ public interface ZLMApi extends Library {
     // MediaSource::broadcastMessage
     int mk_media_source_broadcast_msg(MK_MEDIA_SOURCE ctx, String msg, long len);
 
+    // MediaSource::getOriginUrl()
+    String mk_media_source_get_origin_url(MK_MEDIA_SOURCE ctx);
+
+    // MediaSource::getOriginType()
+    int mk_media_source_get_origin_type(MK_MEDIA_SOURCE ctx);
+
+    // MediaSource::getCreateStamp()
+    long mk_media_source_get_create_stamp(MK_MEDIA_SOURCE ctx);
+
+    // MediaSource::isRecording()
+    int mk_media_source_is_recording(MK_MEDIA_SOURCE ctx, int type);
+
     /**
      * 直播源在ZLMediaKit中被称作为MediaSource，
      * 目前支持3种，分别是RtmpMediaSource、RtspMediaSource、HlsMediaSource

@@ -8,6 +8,9 @@
 
 [![star](https://gitee.com/aizuda/zlm4j/badge/star.svg?theme=white)](https://gitee.com/aizuda/zlm4j/stargazers)  [![fork](https://gitee.com/aizuda/zlm4j/badge/fork.svg?theme=white)](https://gitee.com/aizuda/zlm4j/members)
 
+## 😁特别注意
+   由于github限制最大提交文件大小为100M，所以linux64下运行库只在gitee上存在 [gitee直达](https://gitee.com/aizuda/zlm4j)
+
 ## 😁项目简介
 
 **zlm4j开源流媒体服务框架 ZLMediaKit C Api 的 Java 实现**
@@ -25,6 +28,7 @@ ZLMediaKit 项目的调用原始风格，各位网友可以参照 ZLMediaKit 原
 
 ## 😁版本更新
 
+- v1.0.3 拉取基于2024-04-02-master分支开发 1.增加MediaSource获取源地址 源类型 创建时间戳 
 - v1.0.2 拉取基于2024-04-01-master分支开发 1.增加mac环境包 2.修改包名域
 - v1.0.1 拉取基于2024-02-05-master分支开发 增加拉流代理参数配置
 - v1.0-SNAPSHOT (初始版本)拉取基于2023-11-23-master分支开发

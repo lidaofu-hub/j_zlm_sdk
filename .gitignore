@@ -18,6 +18,7 @@ target/
 .springBeans
 .sts4-cache
 
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -33,3 +34,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### kinux so gile too big ###
+libmk_api.so
