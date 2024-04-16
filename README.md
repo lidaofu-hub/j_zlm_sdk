@@ -9,7 +9,7 @@
 [![star](https://gitee.com/aizuda/zlm4j/badge/star.svg?theme=white)](https://gitee.com/aizuda/zlm4j/stargazers)  [![fork](https://gitee.com/aizuda/zlm4j/badge/fork.svg?theme=white)](https://gitee.com/aizuda/zlm4j/members)
 
 ## 😁特别注意
-   由于github限制最大提交文件大小为100M，所以linux64下运行库只在gitee上存在 [gitee直达](https://gitee.com/aizuda/zlm4j)
+由于github限制最大提交文件大小为100M，所以linux64下运行库只在gitee上存在 [gitee直达](https://gitee.com/aizuda/zlm4j)
 
 ## 😁项目简介
 
@@ -28,7 +28,7 @@ ZLMediaKit 项目的调用原始风格，各位网友可以参照 ZLMediaKit 原
 
 ## 😁版本更新
 
-- v1.0.3 拉取基于2024-04-02-master分支开发 1.增加MediaSource获取源地址 源类型 创建时间戳 
+- v1.0.3 拉取基于2024-04-02-master分支开发 1.增加MediaSource获取源地址 源类型 创建时间戳
 - v1.0.2 拉取基于2024-04-01-master分支开发 1.增加mac环境包 2.修改包名域
 - v1.0.1 拉取基于2024-02-05-master分支开发 增加拉流代理参数配置
 - v1.0-SNAPSHOT (初始版本)拉取基于2023-11-23-master分支开发
@@ -110,14 +110,16 @@ public class Test {
         short rtsp_server_port = ZLM_API.mk_rtsp_server_start((short) 554, 0);
         //创建rtmp服务器 0:失败,非0:端口号
         short rtmp_server_port = ZLM_API.mk_rtmp_server_start((short) 1935, 0);
+        //创建RTC服务器 0:失败,非0:端口号
+        short rtc_server_port = ZLM_API.mk_rtc_server_start((short)8000);
         /*****************************下面为推流及播放********************************/
         // 推流：利用obs、ffmpeg 进行推流 RTMP推流：rtmp://127.0.0.1:rtmp_port/流APP/流名称  RTSP推流：rtsp://127.0.0.1:rtsp_port/流APP/流名称
         // 下面是各协议拉流播放的访问格式
-        // FLV拉流：http://127.0.0.1:http_port/流APP/流名称.live.flv
-        // WS-FLV拉流：ws://127.0.0.1:http_port/流APP/流名称.live.flv
-        // HLS拉流：http://127.0.0.1:http_port/流APP/流名称/hls.m3u8
-        // RTMP拉流：rtmp://127.0.0.1:rtmp_port/流APP/流名称
-        // RTSP拉流：rtsp://127.0.0.1:rtsp_port/流APP/流名称
+        // HTTP-FLV拉流：http://ip:http_port/流APP/流名称.live.flv
+        // WS-FLV拉流：ws://ip:http_port/流APP/流名称.live.flv
+        // HLS拉流：http://ip:http_port/流APP/流名称/hls.m3u8
+        // RTMP拉流：rtmp://ip:rtmp_port/流APP/流名称
+        // RTSP拉流：rtsp://ip:rtsp_port/流APP/流名称
         /*****************************下面为流代理演示********************************/
         //创建拉流代理
         MK_INI option = ZLM_API.mk_ini_create();
@@ -136,7 +138,8 @@ public class Test {
         ZLM_API.mk_ini_set_option_int(option,"auto_close",1);
         MK_PROXY_PLAYER mk_proxy = ZLM_API.mk_proxy_player_create2("__defaultVhost__", "live", "test",option );
         //开始播放
-        ZLM_API.mk_proxy_player_play(mk_proxy, "rtsp://admin:12345@127.0.0.1/h254/ch1/sub/av_stream");
+        ZLM_API.mk_proxy_player_play(mk_proxy, "rtsp://admin:hk123456@192.168.1.64/h264/ch1/sub/av_stream");
+        ZLM_API.mk_ini_release(option);
         //回调关闭事件
         IMKProxyPlayCloseCallBack imkProxyPlayCloseCallBack = new IMKProxyPlayCloseCallBack() {
             @Override
@@ -156,6 +159,7 @@ public class Test {
     }
 }
 
+
 ```
 
 ## 😁集成项目
@@ -168,7 +172,7 @@ public class Test {
         <dependency>
             <groupId>com.aizuda</groupId>
             <artifactId>zlm4j</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
 ```
 

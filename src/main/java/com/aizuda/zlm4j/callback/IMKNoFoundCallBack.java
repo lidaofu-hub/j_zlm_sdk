@@ -3,6 +3,8 @@ package com.aizuda.zlm4j.callback;
 import com.aizuda.zlm4j.structure.MK_MEDIA_INFO;
 import com.aizuda.zlm4j.structure.MK_SOCK_INFO;
 import com.sun.jna.Callback;
+import com.sun.jna.ptr.ByteByReference;
+import com.sun.jna.ptr.IntByReference;
 
 /**
  * 未找到流后会广播该事件，请在监听该事件后去拉流或其他方式产生流，这样就能按需拉流了
