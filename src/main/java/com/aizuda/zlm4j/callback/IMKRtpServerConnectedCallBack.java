@@ -10,5 +10,5 @@ public interface IMKRtpServerConnectedCallBack extends Callback {
     /**
      * TCP 主动模式时连接到服务器是否成功的回调
      */
-    public void invoke(Pointer user_data);
+    public void invoke(Pointer user_data, int err, String what, int sys_err);
 }

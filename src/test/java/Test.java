@@ -1,62 +1,19 @@
-<p align="center">
-  <a >
-   <img alt="zlm4j-Logo" src="doc/images/logo.jpg" width="350px">
-  </a>
-</p>
+import com.aizuda.zlm4j.callback.IMKProxyPlayCloseCallBack;
+import com.aizuda.zlm4j.callback.IMKSourceSendRtpResultCallBack;
+import com.aizuda.zlm4j.core.ZLMApi;
+import com.aizuda.zlm4j.structure.MK_EVENTS;
+import com.aizuda.zlm4j.structure.MK_INI;
+import com.aizuda.zlm4j.structure.MK_MEDIA;
+import com.aizuda.zlm4j.structure.MK_PROXY_PLAYER;
+import com.sun.jna.Native;
+import com.sun.jna.Pointer;
 
-# 📌 zlm4j 📌
-
-[![star](https://gitee.com/aizuda/zlm4j/badge/star.svg?theme=white)](https://gitee.com/aizuda/zlm4j/stargazers)  [![fork](https://gitee.com/aizuda/zlm4j/badge/fork.svg?theme=white)](https://gitee.com/aizuda/zlm4j/members)
-
-## 😁特别注意
-由于github限制最大提交文件大小为100M，所以linux64下运行库只在gitee上存在 [gitee直达](https://gitee.com/aizuda/zlm4j)
-
-## 😁项目文档
-[飞书文档直达 https://ux5phie02ut.feishu.cn/wiki/NA2ywJRY2ivALSkPfUycZFM4nUB?from=from_copylink ](https://ux5phie02ut.feishu.cn/wiki/NA2ywJRY2ivALSkPfUycZFM4nUB?from=from_copylink)
-## 😁项目简介
-
-**zlm4j开源流媒体服务框架 ZLMediaKit C Api 的 Java 实现**
-
-感谢 [@夏楚](https://github.com/xia-chu)
-提供了这么好的开源流媒体服务框架[ZLMediaKit ](https://github.com/ZLMediaKit/ZLMediaKit)
-
-本项目是对 ZLMediaKit 提供的 C Api 的 Java Api 封装(部分封装)。采用 JNA 对 ZLMediaKit C Api 进行解析，并进行微调和修改，基于
-ZLMediaKit 项目的调用原始风格，各位网友可以参照 ZLMediaKit 原始项目文档编写应用程序。
-
-使用此项目可以实现现有项目快速集成流媒体服务功能，无需部署额外的流媒体服务器，利用原始流事件回调更加方便的操作流(
-推拉流鉴权、按需拉流、自动关流、转协议、截图、录制、国标GB推流)
-
-具体如何集成到项目可以参考[JMediaServer](https://github.com/lidaofu-hub/j_media_server)
-
-## 😁版本更新
-
-- v1.0.3 拉取基于2024-04-02-master分支开发 1.增加MediaSource获取源地址 源类型 创建时间戳
-- v1.0.2 拉取基于2024-04-01-master分支开发 1.增加mac环境包 2.修改包名域
-- v1.0.1 拉取基于2024-02-05-master分支开发 增加拉流代理参数配置
-- v1.0-SNAPSHOT (初始版本)拉取基于2023-11-23-master分支开发
-
-## 😁SDK功能
-
-- **流媒体服务**：支持自定义HTTP/RTSP/RTMP流媒体服务端口，支持原生ZLMediaKit各种配置
-- **推流功能**：支持ZLMediaKit提供的RTSP/RTMP/RTC/SRT/GB28181/WebRTC等协议推流，支持推流鉴权
-- **拉流功能**：支持RTSP/RTMP/HTTP-FLV/WS-FLV/WS-HLS/FMP4等流协议输出
-- **流代理功能**：支持RTSP/RTMP/HTTP-FLV/HLS等流接入，支持拉流鉴权、按需拉流、无人观看自动关流、流量统计
-- **录制功能**：支持录制MP4/FLV/M3U8等格式，支持MP4分片大小控制
-- **事件**：支持流上下线、推拉流、流录制完成、无人观看、RTSP鉴权等回调
-
-## 😁项目组成
-
-1. 本项目已包含所需的win64/linux64动态链接库mk_api.dll\libmk_api.so 如需其他版本请拉取对应版本编译
-2. 相关配置项及翻译在resources/conf.ini中，配置方式参见示例代码，或者导入配置文件
-3. 本项目包含 core、callback、structure 模块
-
-- **core**：为核心模块，封装常用大部分 API，如有没有添加想要的，可以添加对应的 API 到 ZLMApi
-- **callback**：对应 C Api 中回调
-- **structure**：对应 C Api 中结构体 注意由于 C Api 中结构体为空，所以 dwSize 为添加的默认参数，否则运行会报错
-
-## 😁示例代码
-
-``` java
+/**
+ * 测试程序  展示了服务器配置 系统配置 流媒体服务启动 回调监听  拉流代理
+ *
+ * @author lidaofu
+ * @since 2023/11/23
+ **/
 public class Test {
     //动态链接库放在/resource/win32-x86-64&/resource/linux-x86-64下JNA会自动查找目录
     public static ZLMApi ZLM_API = Native.load("mk_api", ZLMApi.class);
@@ -71,11 +28,11 @@ public class Test {
         //配置参数 全部配置参数及说明见(resources/conf.ini) 打开自动关流 对应conf.ini中配置[protocol]
         ZLM_API.mk_ini_set_option(mkIni, "general.mediaServerId", "JMediaServer");
         ZLM_API.mk_ini_set_option(mkIni, "http.notFound", "<h1 style=\"text-align:center;\">Media Server V1.0 By LiDaoFu</h1>");
-        ZLM_API.mk_ini_set_option_int(mkIni, "protocol.auto_close",0);
+        ZLM_API.mk_ini_set_option_int(mkIni, "protocol.auto_close", 0);
         ZLM_API.mk_ini_set_option_int(mkIni, "general.streamNoneReaderDelayMS", 30000);
         ZLM_API.mk_ini_set_option_int(mkIni, "general.maxStreamWaitMS", 30000);
         ZLM_API.mk_ini_set_option_int(mkIni, "protocol.enable_ts", 1);
-        ZLM_API.mk_ini_set_option_int(mkIni, "protocol.enable_hls",1);
+        ZLM_API.mk_ini_set_option_int(mkIni, "protocol.enable_hls", 1);
         ZLM_API.mk_ini_set_option_int(mkIni, "protocol.enable_fmp4", 1);
         ZLM_API.mk_ini_set_option_int(mkIni, "protocol.enable_rtsp", 1);
         ZLM_API.mk_ini_set_option_int(mkIni, "protocol.enable_rtmp", 1);
@@ -84,9 +41,9 @@ public class Test {
         ZLM_API.mk_ini_set_option_int(mkIni, "protocol.enable_audio", 1);
         ZLM_API.mk_ini_set_option_int(mkIni, "protocol.mp4_as_player", 1);
         ZLM_API.mk_ini_set_option_int(mkIni, "protocol.mp4_max_second", 3600);
-        ZLM_API.mk_ini_set_option(mkIni, "http.rootPath","D:/www");
+        ZLM_API.mk_ini_set_option(mkIni, "http.rootPath", "D:/www");
         ZLM_API.mk_ini_set_option(mkIni, "protocol.mp4_save_path", "D:/www");
-        ZLM_API.mk_ini_set_option(mkIni, "protocol.hls_save_path","D:/www");
+        ZLM_API.mk_ini_set_option(mkIni, "protocol.hls_save_path", "D:/www");
         ZLM_API.mk_ini_set_option_int(mkIni, "protocol.hls_demand", 0);
         ZLM_API.mk_ini_set_option_int(mkIni, "protocol.rtsp_demand", 0);
         ZLM_API.mk_ini_set_option_int(mkIni, "protocol.rtmp_demand", 0);
@@ -96,9 +53,9 @@ public class Test {
         MK_EVENTS mkEvents = new MK_EVENTS();
         //流状态改变回调
         mkEvents.on_mk_media_changed = (regist, sender) -> {
-            System.out.println("app:"+ZLM_API.mk_media_source_get_app(sender));
-            System.out.println("stream:"+ZLM_API.mk_media_source_get_stream(sender));
-            System.out.println("schema:"+ZLM_API.mk_media_source_get_schema(sender));
+            System.out.println("app:" + ZLM_API.mk_media_source_get_app(sender));
+            System.out.println("stream:" + ZLM_API.mk_media_source_get_stream(sender));
+            System.out.println("schema:" + ZLM_API.mk_media_source_get_schema(sender));
             System.out.println("这里是流改变回调通知:" + regist);
         };
         //无人观看回调
@@ -115,7 +72,6 @@ public class Test {
         };
         //添加全局回调
         ZLM_API.mk_events_listen(mkEvents);
-        //Pointer iniPointer = ZLM_API.mk_ini_dump_string(mkIni);
         //初始化zmk服务器
         ZLM_API.mk_env_init1(1, 1, 1, null, 0, 0, null, 0, null, null);
         //创建http服务器 0:失败,非0:端口号
@@ -125,7 +81,7 @@ public class Test {
         //创建rtmp服务器 0:失败,非0:端口号
         short rtmp_server_port = ZLM_API.mk_rtmp_server_start((short) 1935, 0);
         //创建RTC服务器 0:失败,非0:端口号
-        short rtc_server_port = ZLM_API.mk_rtc_server_start((short)8000);
+        short rtc_server_port = ZLM_API.mk_rtc_server_start((short) 8000);
         /*****************************下面为推流及播放********************************/
         // 推流：利用obs、ffmpeg 进行推流 RTMP推流：rtmp://127.0.0.1:rtmp_port/流APP/流名称  RTSP推流：rtsp://127.0.0.1:rtsp_port/流APP/流名称
         // 下面是各协议拉流播放的访问格式
@@ -137,20 +93,20 @@ public class Test {
         /*****************************下面为流代理演示********************************/
         //创建拉流代理
         MK_INI option = ZLM_API.mk_ini_create();
-        ZLM_API.mk_ini_set_option_int(option,"hls_enabled",0);
-        ZLM_API.mk_ini_set_option_int(option,"mp4_enabled",0);
-        ZLM_API.mk_ini_set_option_int(option,"enable_audio",0);
-        ZLM_API.mk_ini_set_option_int(option,"enable_fmp4",0);
-        ZLM_API.mk_ini_set_option_int(option,"enable_ts",0);
-        ZLM_API.mk_ini_set_option_int(option,"enable_hls",0);
-        ZLM_API.mk_ini_set_option_int(option,"enable_rtsp",1);
-        ZLM_API.mk_ini_set_option_int(option,"enable_rtmp",1);
-        ZLM_API.mk_ini_set_option_int(option,"mp4_max_second",3600);
+        ZLM_API.mk_ini_set_option_int(option, "hls_enabled", 0);
+        ZLM_API.mk_ini_set_option_int(option, "mp4_enabled", 0);
+        ZLM_API.mk_ini_set_option_int(option, "enable_audio", 0);
+        ZLM_API.mk_ini_set_option_int(option, "enable_fmp4", 0);
+        ZLM_API.mk_ini_set_option_int(option, "enable_ts", 0);
+        ZLM_API.mk_ini_set_option_int(option, "enable_hls", 0);
+        ZLM_API.mk_ini_set_option_int(option, "enable_rtsp", 1);
+        ZLM_API.mk_ini_set_option_int(option, "enable_rtmp", 1);
+        ZLM_API.mk_ini_set_option_int(option, "mp4_max_second", 3600);
         //ZLM_API.mk_ini_set_option(option,"mp4_save_path","D:/record");
         //ZLM_API.mk_ini_set_option(option,"hls_save_path","D:/record");
-        ZLM_API.mk_ini_set_option_int(option,"add_mute_audio",0);
-        ZLM_API.mk_ini_set_option_int(option,"auto_close",1);
-        MK_PROXY_PLAYER mk_proxy = ZLM_API.mk_proxy_player_create2("__defaultVhost__", "live", "test",option );
+        ZLM_API.mk_ini_set_option_int(option, "add_mute_audio", 0);
+        ZLM_API.mk_ini_set_option_int(option, "auto_close", 1);
+        MK_PROXY_PLAYER mk_proxy = ZLM_API.mk_proxy_player_create2("__defaultVhost__", "live", "test", option);
         //开始播放
         ZLM_API.mk_proxy_player_play(mk_proxy, "rtsp://admin:hk123456@192.168.1.64/h264/ch1/sub/av_stream");
         ZLM_API.mk_ini_release(option);
@@ -171,35 +127,3 @@ public class Test {
         ZLM_API.mk_stop_all_server();
     }
 }
-
-
-
-```
-
-## 😁集成项目
-
-1. 可直接复制代码到自己的项目中，方便修改参数进行二次开发
-
-2. 由于此项目暂未发布到中央仓库，可以下载此项目然后打包到本地仓库（mvn install）然后项目引入
-
-``` xml
-        <dependency>
-            <groupId>com.aizuda</groupId>
-            <artifactId>zlm4j</artifactId>
-            <version>1.0.3</version>
-        </dependency>
-```
-
-## 😁常见问题
-
-1. 在 windows 环境运行出现 java.lang.UnsatisfiedLinkError 问题，请安装 openssl 库
-   参见[OpenSSL 下载 ](https://slproweb.com/products/Win32OpenSSL.html)
-   或者复制libssl-3-x64.dll&libcrypto-3-x64.dll到系统动态链接库下
-
-## 😁学习探讨
-
- <p align="center">
-  <a >
-   <img alt="zlm4j-qun" src="doc/images/qun.jpg" width="350px">
-  </a>
-</p>
