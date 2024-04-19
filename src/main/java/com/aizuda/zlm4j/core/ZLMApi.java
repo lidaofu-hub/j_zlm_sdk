@@ -1373,7 +1373,7 @@ public interface ZLMApi extends Library {
     /**
      * 获取帧数据指针
      */
-    String mk_frame_get_data(MK_FRAME frame);
+    Pointer mk_frame_get_data(MK_FRAME frame);
 
     /**
      * 获取帧数据指针长度
