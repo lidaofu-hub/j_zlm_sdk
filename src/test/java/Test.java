@@ -1,5 +1,6 @@
 import com.aizuda.zlm4j.callback.IMKProxyPlayCloseCallBack;
 import com.aizuda.zlm4j.callback.IMKSourceSendRtpResultCallBack;
+import com.aizuda.zlm4j.callback.IMKWebRtcGetAnwerSdpCallBack;
 import com.aizuda.zlm4j.core.ZLMApi;
 import com.aizuda.zlm4j.structure.MK_EVENTS;
 import com.aizuda.zlm4j.structure.MK_INI;
@@ -93,8 +94,7 @@ public class Test {
         /*****************************下面为流代理演示********************************/
         //创建拉流代理
         MK_INI option = ZLM_API.mk_ini_create();
-        ZLM_API.mk_ini_set_option_int(option, "hls_enabled", 0);
-        ZLM_API.mk_ini_set_option_int(option, "mp4_enabled", 0);
+        ZLM_API.mk_ini_set_option_int(option, "enable_mp4", 0);
         ZLM_API.mk_ini_set_option_int(option, "enable_audio", 0);
         ZLM_API.mk_ini_set_option_int(option, "enable_fmp4", 0);
         ZLM_API.mk_ini_set_option_int(option, "enable_ts", 0);
@@ -121,6 +121,7 @@ public class Test {
         //添加代理关闭回调 并把代理客户端传过去释放
         ZLM_API.mk_proxy_player_set_on_close(mk_proxy, imkProxyPlayCloseCallBack, mk_proxy.getPointer());
         /*****************************end********************************/
+
         //阻塞60s
         Thread.sleep(60000L);
         //停止所有服务器

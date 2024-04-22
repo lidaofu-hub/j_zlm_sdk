@@ -138,7 +138,7 @@ public class Test {
         //创建拉流代理
         MK_INI option = ZLM_API.mk_ini_create();
         ZLM_API.mk_ini_set_option_int(option,"hls_enabled",0);
-        ZLM_API.mk_ini_set_option_int(option,"mp4_enabled",0);
+        ZLM_API.mk_ini_set_option_int(option,"enable_mp4",0);
         ZLM_API.mk_ini_set_option_int(option,"enable_audio",0);
         ZLM_API.mk_ini_set_option_int(option,"enable_fmp4",0);
         ZLM_API.mk_ini_set_option_int(option,"enable_ts",0);
