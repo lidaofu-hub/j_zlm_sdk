@@ -30,6 +30,7 @@ ZLMediaKit 项目的调用原始风格，各位网友可以参照 ZLMediaKit 原
 
 ## 😁版本更新
 
+- v1.0.4 拉取基于2024-05-07-master分支开发 1.增加rtc相关回调及函数
 - v1.0.3 拉取基于2024-04-02-master分支开发 1.增加MediaSource获取源地址 源类型 创建时间戳
 - v1.0.2 拉取基于2024-04-01-master分支开发 1.增加mac环境包 2.修改包名域
 - v1.0.1 拉取基于2024-02-05-master分支开发 增加拉流代理参数配置
@@ -186,15 +187,13 @@ public class Test {
         <dependency>
             <groupId>com.aizuda</groupId>
             <artifactId>zlm4j</artifactId>
-            <version>1.0.3</version>
+            <version>1.0.4</version>
         </dependency>
 ```
 
 ## 😁常见问题
 
-1. 在 windows 环境运行出现 java.lang.UnsatisfiedLinkError 问题，请安装 openssl 库
-   参见[OpenSSL 下载 ](https://slproweb.com/products/Win32OpenSSL.html)
-   或者复制libssl-3-x64.dll&libcrypto-3-x64.dll到系统动态链接库下
+1. 参见[ZLM4J常见问题 ](https://ux5phie02ut.feishu.cn/wiki/SzIAwyxnpilVMlkccS4cfJFGn1g)
 
 ## 😁学习探讨
 

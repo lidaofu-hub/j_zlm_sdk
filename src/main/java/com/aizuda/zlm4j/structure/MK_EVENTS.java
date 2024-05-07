@@ -126,7 +126,7 @@ public class MK_EVENTS extends SdkStructure {
      * @param total_seconds 本次tcp会话时长，单位秒
      * @param is_player 客户端是否为播放器
      */
-    public IMKHttpFlowReportCallBack on_mk_flow_report;
+    public IMKFlowReportCallBack on_mk_flow_report;
 
 
     /**
@@ -152,5 +152,33 @@ public class MK_EVENTS extends SdkStructure {
      */
     public IMKSendRtpStopCallBack on_mk_media_send_rtp_stop;
 
+    /**
+     * rtc sctp连接中/完成/失败/关闭回调
+     *
+     * @param rtc_transport 数据通道对象
+     */
+    public IMKRtcSctpConnecting on_mk_rtc_sctp_connecting;
+    public IMKRtcSctpConnected on_mk_rtc_sctp_connected;
+    public IMKRtcSctpFailed on_mk_rtc_sctp_failed;
+    public IMKRtcSctpClosed on_mk_rtc_sctp_closed;
 
+    /**
+     * rtc数据通道发送数据回调
+     *
+     * @param rtc_transport 数据通道对象
+     * @param msg           数据
+     * @param len           数据长度
+     */
+    public IMKRtcSctpSend on_mk_rtc_sctp_send;
+
+    /**
+     * rtc数据通道接收数据回调
+     *
+     * @param rtc_transport 数据通道对象
+     * @param streamId      流id
+     * @param ppid          协议id
+     * @param msg           数据
+     * @param len           数据长度
+     */
+    public IMKRtcSctpReceived on_mk_rtc_sctp_received;
 }

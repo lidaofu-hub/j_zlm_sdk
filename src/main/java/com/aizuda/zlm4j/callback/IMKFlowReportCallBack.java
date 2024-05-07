@@ -7,7 +7,7 @@ import com.sun.jna.Callback;
 /**
  * 停止rtsp/rtmp/http-flv会话后流量汇报事件广播
  */
-public interface IMKHttpFlowReportCallBack extends Callback {
+public interface IMKFlowReportCallBack extends Callback {
     /**
      * 停止rtsp/rtmp/http-flv会话后流量汇报事件广播
      * @param url_info 播放url相关信息
