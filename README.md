@@ -26,10 +26,11 @@ ZLMediaKit 项目的调用原始风格，各位网友可以参照 ZLMediaKit 原
 使用此项目可以实现现有项目快速集成流媒体服务功能，无需部署额外的流媒体服务器，利用原始流事件回调更加方便的操作流(
 推拉流鉴权、按需拉流、自动关流、转协议、截图、录制、国标GB推流)
 
-具体如何集成到项目可以参考[JMediaServer](https://github.com/lidaofu-hub/j_media_server)
+具体如何集成到项目可以参考[JMediaServer](https://gitee.com/daofuli/j_media_server)
 
 ## 😁版本更新
 
+- v1.0.5 拉取基于2024-05-10-master分支开发 1.增加on_record_ts回调 2.修改mk_mp4_info为mk_record_info
 - v1.0.4 拉取基于2024-05-07-master分支开发 1.增加rtc相关回调及函数
 - v1.0.3 拉取基于2024-04-02-master分支开发 1.增加MediaSource获取源地址 源类型 创建时间戳
 - v1.0.2 拉取基于2024-04-01-master分支开发 1.增加mac环境包 2.修改包名域
@@ -187,7 +188,7 @@ public class Test {
         <dependency>
             <groupId>com.aizuda</groupId>
             <artifactId>zlm4j</artifactId>
-            <version>1.0.4</version>
+            <version>1.0.5</version>
         </dependency>
 ```
 

@@ -114,6 +114,11 @@ public class MK_EVENTS extends SdkStructure {
     public IMKRecordMp4CallBack on_mk_record_mp4;
 
     /**
+     * 录制ts分片文件成功后广播
+     */
+    public IMKRecordTsCallBack on_mk_record_ts;
+
+    /**
      * shell登录鉴权
      */
     public IMKShellLoginCallBack on_mk_shell_login;

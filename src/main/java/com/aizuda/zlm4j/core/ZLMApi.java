@@ -967,37 +967,37 @@ public interface ZLMApi extends Library {
     void mk_events_listen(MK_EVENTS events);
 
     /*******************************结构体相关**********************************/
-    ///////////////////////////////////////////MP4Info/////////////////////////////////////////////
-//MP4Info对象的C映射
+    ///////////////////////////////////////////RecordInfo/////////////////////////////////////////////
+    //RecordInfo对象的C映射
     // GMT 标准时间，单位秒
-    long mk_mp4_info_get_start_time(MK_MP4_INFO ctx);
+    long mk_record_info_get_start_time(MK_RECORD_INFO ctx);
 
     // 录像长度，单位秒
-    float mk_mp4_info_get_time_len(MK_MP4_INFO ctx);
+    float mk_record_info_get_time_len(MK_RECORD_INFO ctx);
 
     // 文件大小，单位 BYTE
-    long mk_mp4_info_get_file_size(MK_MP4_INFO ctx);
+    long mk_record_info_get_file_size(MK_RECORD_INFO ctx);
 
     // 文件路径
-    String mk_mp4_info_get_file_path(MK_MP4_INFO ctx);
+    String mk_record_info_get_file_path(MK_RECORD_INFO ctx);
 
     // 文件名称
-    String mk_mp4_info_get_file_name(MK_MP4_INFO ctx);
+    String mk_record_info_get_file_name(MK_RECORD_INFO ctx);
 
     // 文件夹路径
-    String mk_mp4_info_get_folder(MK_MP4_INFO ctx);
+    String mk_record_info_get_folder(MK_RECORD_INFO ctx);
 
     // 播放路径
-    String mk_mp4_info_get_url(MK_MP4_INFO ctx);
+    String mk_record_info_get_url(MK_RECORD_INFO ctx);
 
     // 应用名称
-    String mk_mp4_info_get_vhost(MK_MP4_INFO ctx);
+    String mk_record_info_get_vhost(MK_RECORD_INFO ctx);
 
     // 流 ID
-    String mk_mp4_info_get_app(MK_MP4_INFO ctx);
+    String mk_record_info_get_app(MK_RECORD_INFO ctx);
 
     // 虚拟主机
-    String mk_mp4_info_get_stream(MK_MP4_INFO ctx);
+    String mk_record_info_get_stream(MK_RECORD_INFO ctx);
 
     ///////////////////////////////////////////Parser/////////////////////////////////////////////
 //Parser对象的C映射
