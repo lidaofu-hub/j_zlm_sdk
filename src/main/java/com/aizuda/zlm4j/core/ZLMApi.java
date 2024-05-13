@@ -22,18 +22,18 @@ public interface ZLMApi extends Library {
     void mk_env_init(MK_CONFIG cfg);
 
     /**
-     * 服务器初始化
+     * 初始化环境参数
      *
-     * @param thread_num
-     * @param log_level
-     * @param log_mask
-     * @param log_file_path
-     * @param log_file_days
-     * @param ini_is_path
-     * @param ini
-     * @param ssl_is_path
-     * @param ssl
-     * @param ssl_pwd
+     * @param thread_num 线程数
+     * @param log_level 日志等级 0：TRACE 1：DEBUG 2：INFO 3：WARN 4：ERROR
+     * @param log_mask 日志输入 1：LOG_CONSOLE输出到控制台  2：LOG_FILE输入到文件 4：LOG_CALLBACK输出到回调函数
+     * @param log_file_path 文件日志保存路径,路径可以不存在(内部可以创建文件夹)，设置为NULL关闭日志输出至文件
+     * @param log_file_days 文件日志保存天数,设置为0关闭日志文件
+     * @param ini_is_path 配置文件是内容还是路径
+     * @param ini 配置文件内容或路径，可以为NULL,如果该文件不存在，那么将导出默认配置至该文件
+     * @param ssl_is_path ssl证书是内容还是路径
+     * @param ssl ssl证书内容或路径，可以为NULL
+     * @param ssl_pwd 证书密码，可以为NULL
      */
     void mk_env_init1(int thread_num, int log_level, int log_mask, String log_file_path, int log_file_days, int ini_is_path, Pointer ini, int ssl_is_path, String ssl, String ssl_pwd);
 
