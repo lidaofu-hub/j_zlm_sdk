@@ -479,7 +479,7 @@ public interface ZLMApi extends Library {
      * @param linesize yuv420p linesize
      * @param cts      视频采集时间戳，单位毫秒
      */
-    void mk_media_input_yuv(MK_MEDIA ctx, Pointer yuv, Pointer linesize, long cts);
+    void mk_media_input_yuv(MK_MEDIA ctx, Pointer yuv[], int linesize[], long cts);
 
     /**
      * 输入单帧AAC音频(单独指定adts头)，请改用mk_media_input_frame方法
