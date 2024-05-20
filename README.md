@@ -29,7 +29,7 @@ ZLMediaKit 项目的调用原始风格，各位网友可以参照 ZLMediaKit 原
 具体如何集成到项目可以参考[JMediaServer](https://gitee.com/daofuli/j_media_server)
 
 ## 😁版本更新
-
+- v1.0.7 拉取基于2024-05-20-master分支开发 增加内存数据统计相关api及回调
 - v1.0.6 拉取基于2024-05-16-master分支开发 1.创建流增加x264编码库支持 2.创建流增加faac编码库支持
 - v1.0.5 拉取基于2024-05-10-master分支开发 1.增加on_record_ts回调 2.修改mk_mp4_info为mk_record_info
 - v1.0.4 拉取基于2024-05-07-master分支开发 1.增加rtc相关回调及函数
