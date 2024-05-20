@@ -1455,4 +1455,11 @@ public interface ZLMApi extends Library {
      * @param len      数据长度
      */
     void mk_rtc_send_datachannel(MK_RTC_TRANSPORT ctx, float streamId, int ppid, byte msg, long len);
+
+
+    /**
+     * 获取内存数据统计
+     * @param ini 存放统计结果
+     */
+    void  mk_get_statistic(IMKGetStatisticCallBack cb, Pointer user_data, IMKFreeUserDataCallBack free_cb);
 }

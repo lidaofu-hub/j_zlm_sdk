@@ -189,7 +189,7 @@ public class Test {
         <dependency>
             <groupId>com.aizuda</groupId>
             <artifactId>zlm4j</artifactId>
-            <version>1.0.6</version>
+            <version>1.0.7</version>
         </dependency>
 ```
 
