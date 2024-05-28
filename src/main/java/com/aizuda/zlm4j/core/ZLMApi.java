@@ -24,18 +24,59 @@ public interface ZLMApi extends Library {
     /**
      * 初始化环境参数
      *
-     * @param thread_num 线程数
-     * @param log_level 日志等级 0：TRACE 1：DEBUG 2：INFO 3：WARN 4：ERROR
-     * @param log_mask 日志输入 1：LOG_CONSOLE输出到控制台  2：LOG_FILE输入到文件 4：LOG_CALLBACK输出到回调函数
+     * @param thread_num    线程数
+     * @param log_level     日志等级 0：TRACE 1：DEBUG 2：INFO 3：WARN 4：ERROR
+     * @param log_mask      日志输入 1：LOG_CONSOLE输出到控制台  2：LOG_FILE输入到文件 4：LOG_CALLBACK输出到回调函数
      * @param log_file_path 文件日志保存路径,路径可以不存在(内部可以创建文件夹)，设置为NULL关闭日志输出至文件
      * @param log_file_days 文件日志保存天数,设置为0关闭日志文件
-     * @param ini_is_path 配置文件是内容还是路径
-     * @param ini 配置文件内容或路径，可以为NULL,如果该文件不存在，那么将导出默认配置至该文件
-     * @param ssl_is_path ssl证书是内容还是路径
-     * @param ssl ssl证书内容或路径，可以为NULL
-     * @param ssl_pwd 证书密码，可以为NULL
+     * @param ini_is_path   配置文件是内容还是路径
+     * @param ini           配置文件内容或路径，可以为NULL,如果该文件不存在，那么将导出默认配置至该文件
+     * @param ssl_is_path   ssl证书是内容还是路径
+     * @param ssl           ssl证书内容或路径，可以为NULL
+     * @param ssl_pwd       证书密码，可以为NULL
      */
     void mk_env_init1(int thread_num, int log_level, int log_mask, String log_file_path, int log_file_days, int ini_is_path, Pointer ini, int ssl_is_path, String ssl, String ssl_pwd);
+
+
+    /**
+     * 获取本程序可执行文件路径
+     *
+     * @return 文件路径，使用完后需要自己mk_free
+     */
+    Pointer mk_util_get_exe_path();
+
+    /**
+     * 获取本程序可执行文件相同目录下文件的绝对路径
+     *
+     * @param relative_path 同目录下文件的路径相对,可以为null
+     * @return 文件路径，使用完后需要自己mk_free
+     */
+
+    Pointer mk_util_get_exe_dir(String relative_path);
+
+    /**
+     * 获取unix标准的系统时间戳
+     *
+     * @return 当前系统时间戳
+     */
+    long mk_util_get_current_millisecond();
+
+    /**
+     * 获取时间字符串
+     *
+     * @param fmt 时间格式，譬如%Y-%m-%d %H:%M:%S
+     * @return 时间字符串，使用完后需要自己mk_free
+     */
+    Pointer mk_util_get_current_time_string(String fmt);
+
+    /**
+     * 打印二进制为字符串
+     *
+     * @param buf 二进制数据
+     * @param len 数据长度
+     * @return 可打印的调试信息，使用完后需要自己mk_free
+     */
+    Pointer mk_util_hex_dump(Pointer buf, int len);
 
 
     /**
@@ -1459,7 +1500,8 @@ public interface ZLMApi extends Library {
 
     /**
      * 获取内存数据统计
+     *
      * @param ini 存放统计结果
      */
-    void  mk_get_statistic(IMKGetStatisticCallBack cb, Pointer user_data, IMKFreeUserDataCallBack free_cb);
+    void mk_get_statistic(IMKGetStatisticCallBack cb, Pointer user_data, IMKFreeUserDataCallBack free_cb);
 }
