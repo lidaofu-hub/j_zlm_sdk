@@ -47,7 +47,7 @@ ZLMediaKit 项目的调用原始风格，各位网友可以参照 ZLMediaKit 原
 
 ## 😁项目组成
 
-1. 本项目已包含所需的win64/linux64动态链接库mk_api.dll\libmk_api.so 如需其他版本请拉取对应版本编译
+1. 本项目已包含所需的win64/linux64/mac64动态链接库mk_api.dll\libmk_api.so 如需其他版本请拉取对应版本编译，并放到自己项目对应的目录中即可使用 如ARM版本mac电脑需要放到自己项目的resources/darwin-aarch64下
 2. 相关配置项及翻译在resources/conf.ini中，配置方式参见示例代码，或者导入配置文件
 3. 本项目包含 core、callback、structure 模块
 
@@ -186,15 +186,16 @@ public class Test {
 
 1. 可直接复制代码到自己的项目中，方便修改参数进行二次开发
 
-2. 由于此项目暂未发布到中央仓库，可以下载此项目然后打包到本地仓库（mvn install）然后项目引入
+2. jar已发布到maven仓库，如需修改动态链接库请，拉取项目install，并把动态链接库放入对应的目录
 
 ``` xml
         <dependency>
             <groupId>com.aizuda</groupId>
             <artifactId>zlm4j</artifactId>
-            <version>1.0.7</version>
+            <version>1.0.8</version>
         </dependency>
 ```
+3. 目前仅包含Win64、Linux64、MacOS64 动态链接库其他系统链接库请自行编译，
 
 ## 😁常见问题
 
