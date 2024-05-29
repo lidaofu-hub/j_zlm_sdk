@@ -8,9 +8,6 @@
 
 [![star](https://gitee.com/aizuda/zlm4j/badge/star.svg?theme=white)](https://gitee.com/aizuda/zlm4j/stargazers)  [![fork](https://gitee.com/aizuda/zlm4j/badge/fork.svg?theme=white)](https://gitee.com/aizuda/zlm4j/members)
 
-## 😁特别注意
-由于github限制最大提交文件大小为100M，所以linux64下运行库只在gitee上存在 [gitee直达](https://gitee.com/aizuda/zlm4j)
-
 ## 😁项目文档
 [飞书文档直达 https://ux5phie02ut.feishu.cn/wiki/NA2ywJRY2ivALSkPfUycZFM4nUB?from=from_copylink ](https://ux5phie02ut.feishu.cn/wiki/NA2ywJRY2ivALSkPfUycZFM4nUB?from=from_copylink)
 ## 😁项目简介
@@ -29,6 +26,7 @@ ZLMediaKit 项目的调用原始风格，各位网友可以参照 ZLMediaKit 原
 具体如何集成到项目可以参考[JMediaServer](https://gitee.com/daofuli/j_media_server)
 
 ## 😁版本更新
+- v1.0.8 拉取基于2024-05-29-master分支开发 增加拉流重试次数配置
 - v1.0.7 拉取基于2024-05-20-master分支开发 增加内存数据统计相关api及回调
 - v1.0.6 拉取基于2024-05-16-master分支开发 1.创建流增加x264编码库支持 2.创建流增加faac编码库支持
 - v1.0.5 拉取基于2024-05-10-master分支开发 1.增加on_record_ts回调 2.修改mk_mp4_info为mk_record_info
@@ -58,7 +56,7 @@ ZLMediaKit 项目的调用原始风格，各位网友可以参照 ZLMediaKit 原
 - **structure**：对应 C Api 中结构体 注意由于 C Api 中结构体为空，所以 dwSize 为添加的默认参数，否则运行会报错
 
 ## 😁示例代码
-
+**注意示例代码只提供部分功能演示，更多功能请阅读项目文档。**
 ``` java
 public class Test {
     //动态链接库放在/resource/win32-x86-64&/resource/linux-x86-64下JNA会自动查找目录
@@ -69,6 +67,8 @@ public class Test {
     //public static ZLMApi ZLM_API = Native.load("/opt/media/libmk_api.so", ZLMApi.class);
 
     public static void main(String[] args) throws InterruptedException {
+        //初始化sdk配置
+        ZLM_API.mk_env_init2(1, 1, 1, null, 0, 0, null, 0, null, null);
         //初始化环境配置
         MK_INI mkIni = ZLM_API.mk_ini_default();
         //配置参数 全部配置参数及说明见(resources/conf.ini) 打开自动关流 对应conf.ini中配置[protocol]
@@ -119,8 +119,6 @@ public class Test {
         //添加全局回调
         ZLM_API.mk_events_listen(mkEvents);
         //Pointer iniPointer = ZLM_API.mk_ini_dump_string(mkIni);
-        //初始化zmk服务器
-        ZLM_API.mk_env_init1(1, 1, 1, null, 0, 0, null, 0, null, null);
         //创建http服务器 0:失败,非0:端口号
         short http_server_port = ZLM_API.mk_http_server_start((short) 7788, 0);
         //创建rtsp服务器 0:失败,非0:端口号
@@ -153,9 +151,14 @@ public class Test {
         //ZLM_API.mk_ini_set_option(option,"hls_save_path","D:/record");
         ZLM_API.mk_ini_set_option_int(option,"add_mute_audio",0);
         ZLM_API.mk_ini_set_option_int(option,"auto_close",1);
-        MK_PROXY_PLAYER mk_proxy = ZLM_API.mk_proxy_player_create2("__defaultVhost__", "live", "test",option );
+        MK_PROXY_PLAYER mk_proxy = ZLM_API.mk_proxy_player_create4("__defaultVhost__", "live", "test",option,2);
+                //设置代理参数 rtp_type  rtsp播放方式:RTP_TCP = 0, RTP_UDP = 1, RTP_MULTICAST = 2
+        ZLM_API.mk_proxy_player_set_option(mk_proxy, "rtp_type", "1");
+        //设置代理参数 protocol_timeout_ms  协议超时时间 毫秒
+        ZLM_API.mk_proxy_player_set_option(mk_proxy, "protocol_timeout_ms", "2000");
         //开始播放
         ZLM_API.mk_proxy_player_play(mk_proxy, "rtsp://admin:hk123456@192.168.1.64/h264/ch1/sub/av_stream");
+        //释放资源
         ZLM_API.mk_ini_release(option);
         //回调关闭事件
         IMKProxyPlayCloseCallBack imkProxyPlayCloseCallBack = new IMKProxyPlayCloseCallBack() {

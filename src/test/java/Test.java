@@ -24,6 +24,8 @@ public class Test {
     //public static ZLMApi ZLM_API = Native.load("/opt/media/libmk_api.so", ZLMApi.class);
 
     public static void main(String[] args) throws InterruptedException {
+        //初始化sdk配置
+        ZLM_API.mk_env_init2(1, 1, 1, null, 0, 0, null, 0, null, null);
         //初始化环境配置
         MK_INI mkIni = ZLM_API.mk_ini_default();
         //配置参数 全部配置参数及说明见(resources/conf.ini) 打开自动关流 对应conf.ini中配置[protocol]
@@ -73,8 +75,6 @@ public class Test {
         };
         //添加全局回调
         ZLM_API.mk_events_listen(mkEvents);
-        //初始化zmk服务器
-        ZLM_API.mk_env_init1(1, 1, 1, null, 0, 0, null, 0, null, null);
         //创建http服务器 0:失败,非0:端口号
         short http_server_port = ZLM_API.mk_http_server_start((short) 7788, 0);
         //创建rtsp服务器 0:失败,非0:端口号
@@ -106,9 +106,14 @@ public class Test {
         //ZLM_API.mk_ini_set_option(option,"hls_save_path","D:/record");
         ZLM_API.mk_ini_set_option_int(option, "add_mute_audio", 0);
         ZLM_API.mk_ini_set_option_int(option, "auto_close", 1);
-        MK_PROXY_PLAYER mk_proxy = ZLM_API.mk_proxy_player_create2("__defaultVhost__", "live", "test", option);
+        MK_PROXY_PLAYER mk_proxy = ZLM_API.mk_proxy_player_create4("__defaultVhost__", "live", "test",option,2);
+        //设置代理参数 rtp_type  rtsp播放方式:RTP_TCP = 0, RTP_UDP = 1, RTP_MULTICAST = 2
+        ZLM_API.mk_proxy_player_set_option(mk_proxy, "rtp_type", "1");
+        //设置代理参数 protocol_timeout_ms  协议超时时间 毫秒
+        ZLM_API.mk_proxy_player_set_option(mk_proxy, "protocol_timeout_ms", "2000");
         //开始播放
         ZLM_API.mk_proxy_player_play(mk_proxy, "rtsp://admin:hk123456@192.168.1.64/h264/ch1/sub/av_stream");
+        //释放资源
         ZLM_API.mk_ini_release(option);
         //回调关闭事件
         IMKProxyPlayCloseCallBack imkProxyPlayCloseCallBack = new IMKProxyPlayCloseCallBack() {

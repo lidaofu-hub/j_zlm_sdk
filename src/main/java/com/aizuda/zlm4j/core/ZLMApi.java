@@ -35,8 +35,25 @@ public interface ZLMApi extends Library {
      * @param ssl           ssl证书内容或路径，可以为NULL
      * @param ssl_pwd       证书密码，可以为NULL
      */
-    void mk_env_init1(int thread_num, int log_level, int log_mask, String log_file_path, int log_file_days, int ini_is_path, Pointer ini, int ssl_is_path, String ssl, String ssl_pwd);
+    void mk_env_init2(int thread_num, int log_level, int log_mask, String log_file_path, int log_file_days, int ini_is_path, Pointer ini, int ssl_is_path, String ssl, String ssl_pwd);
 
+    /**
+     * 因 C API此函数被舍弃，此方法即将停用
+     * @param thread_num
+     * @param log_level
+     * @param log_mask
+     * @param log_file_path
+     * @param log_file_days
+     * @param ini_is_path
+     * @param ini
+     * @param ssl_is_path
+     * @param ssl
+     * @param ssl_pwd
+     */
+    @Deprecated
+    default void mk_env_init1(int thread_num, int log_level, int log_mask, String log_file_path, int log_file_days, int ini_is_path, Pointer ini, int ssl_is_path, String ssl, String ssl_pwd){
+        mk_env_init2(thread_num, log_level, log_mask, log_file_path, log_file_days, ini_is_path, ini, ssl_is_path, ssl, ssl_pwd);
+    }
 
     /**
      * 获取本程序可执行文件路径
@@ -289,6 +306,20 @@ public interface ZLMApi extends Library {
     /**
      * 创建一个代理播放器
      *
+     * @param vhost       虚拟主机名，一般为__defaultVhost__
+     * @param app         应用名
+     * @param stream      流名
+     * @param hls_enabled 是否生成hls
+     * @param mp4_enabled 是否生成mp4
+     * @param retry_count 重试次数，当<0无限次重试
+     * @return 对象指针
+     */
+    MK_PROXY_PLAYER mk_proxy_player_create3(String vhost, String app, String stream, int hls_enabled, int mp4_enabled, int retry_count);
+
+
+    /**
+     * 创建一个代理播放器
+     *
      * @param vhost  虚拟主机名，一般为__defaultVhost__
      * @param app    应用名
      * @param stream 流名
@@ -296,6 +327,19 @@ public interface ZLMApi extends Library {
      * @return 对象指针
      */
     MK_PROXY_PLAYER mk_proxy_player_create2(String vhost, String app, String stream, MK_INI option);
+
+
+    /**
+     * 创建一个代理播放器
+     *
+     * @param vhost  虚拟主机名，一般为__defaultVhost__
+     * @param app    应用名
+     * @param stream 流名
+     * @param option ProtocolOption相关配置
+     * @param retry_count 重试次数，当<0无限次重试
+     * @return 对象指针
+     */
+    MK_PROXY_PLAYER mk_proxy_player_create4(String vhost, String app, String stream, MK_INI option, int retry_count);
 
 
     /**
