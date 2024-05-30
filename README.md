@@ -95,7 +95,7 @@ public class Test {
         ZLM_API.mk_ini_set_option_int(mkIni, "protocol.rtmp_demand", 0);
         ZLM_API.mk_ini_set_option_int(mkIni, "protocol.ts_demand", 0);
         ZLM_API.mk_ini_set_option_int(mkIni, "protocol.fmp4_demand", 0);
-        //全局回调 全部回调见MK_EVENTS内所有的回调属性，有些需要去实现，不然流无法播放或者无法推流
+        //全局回调 全部回调见MK_EVENTS内所有的回调属性，如果配置了推流回调、播放回调请务必执行invoker_do，否则无法推流、回放
         MK_EVENTS mkEvents = new MK_EVENTS();
         //流状态改变回调
         mkEvents.on_mk_media_changed = (regist, sender) -> {
