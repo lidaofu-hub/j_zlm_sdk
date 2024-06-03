@@ -26,6 +26,7 @@ ZLMediaKit 项目的调用原始风格，各位网友可以参照 ZLMediaKit 原
 具体如何集成到项目可以参考[JMediaServer](https://gitee.com/daofuli/j_media_server)
 
 ## 😁版本更新
+- v1.0.9 拉取基于2024-06-03-master分支开发 1.同步ZLMediaKit滚动更新 2.增加Mac_arm64支持
 - v1.0.8.1 修改支持jdk1.8
 - v1.0.8 拉取基于2024-05-29-master分支开发 增加拉流重试次数配置
 - v1.0.7 拉取基于2024-05-20-master分支开发 增加内存数据统计相关api及回调
@@ -193,10 +194,10 @@ public class Test {
         <dependency>
             <groupId>com.aizuda</groupId>
             <artifactId>zlm4j</artifactId>
-            <version>1.0.8.1</version>
+            <version>1.0.9</version>
         </dependency>
 ```
-3. 目前仅包含Win64、Linux64、MacOS64 动态链接库其他系统链接库请自行编译，并放到自己项目对应的目录中即可使用 如ARM64版本mac电脑需要放到自己项目的resources/darwin-aarch64下
+3. 目前仅包含Win64、Linux64、MacOS64、MacOSarm64 动态链接库其他系统链接库请自行编译，并放到自己项目对应的目录中即可使用 ~~如ARM64版本mac电脑需要放到自己项目的resources/darwin-aarch64下~~
 
 ## 😁常见问题
 
