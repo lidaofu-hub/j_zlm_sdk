@@ -68,7 +68,21 @@ public class Test {
             //这里拿到访问路径后(例如rtmp://xxxx/xxx/xxx?token=xxxx其中?后面就是拿到的参数)的参数
             // err_msg返回 空字符串表示鉴权成功 否则鉴权失败提示
             //String param = ZLM_API.mk_media_info_get_params(url_info);
-            ZLM_API.mk_publish_auth_invoker_do(invoker, "", 0, 0);
+            MK_INI option = ZLM_API.mk_ini_create();
+            ZLM_API.mk_ini_set_option_int(option, "enable_mp4", 1);
+            ZLM_API.mk_ini_set_option_int(option, "enable_audio", 1);
+            ZLM_API.mk_ini_set_option_int(option, "enable_fmp4",1);
+            ZLM_API.mk_ini_set_option_int(option, "enable_ts", 1);
+            ZLM_API.mk_ini_set_option_int(option, "enable_hls",1);
+            ZLM_API.mk_ini_set_option_int(option, "enable_rtsp", 1);
+            ZLM_API.mk_ini_set_option_int(option, "enable_rtmp", 1);
+            ZLM_API.mk_ini_set_option_int(option, "auto_close", 0);
+            ZLM_API.mk_ini_set_option(option, "stream_replace", "test1");
+            //流名称替换
+            //ZLM_API.mk_ini_set_option(option, "stream_replace", "test1");
+            ZLM_API.mk_publish_auth_invoker_do2(invoker, "", option);
+            ZLM_API.mk_ini_release(option);
+            //ZLM_API.mk_publish_auth_invoker_do(invoker, "", 0, 0);
         };
         //添加全局回调
         ZLM_API.mk_events_listen(mkEvents);
