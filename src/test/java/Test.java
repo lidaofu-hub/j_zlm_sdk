@@ -1,4 +1,4 @@
-import com.aizuda.zlm4j.callback.IMKProxyPlayCloseCallBack;
+import com.aizuda.zlm4j.callback.IMKProxyPlayerCallBack;
 import com.aizuda.zlm4j.core.ZLMApi;
 import com.aizuda.zlm4j.structure.MK_EVENTS;
 import com.aizuda.zlm4j.structure.MK_INI;
@@ -126,10 +126,23 @@ public class Test {
         ZLM_API.mk_proxy_player_play(mk_proxy, "rtsp://admin:hk123456@192.168.1.64/h264/ch1/sub/av_stream");
         //释放资源
         ZLM_API.mk_ini_release(option);
-        //回调关闭事件
-        IMKProxyPlayCloseCallBack imkProxyPlayCloseCallBack = new IMKProxyPlayCloseCallBack() {
+        //第一次代理结果获取
+        IMKProxyPlayerCallBack imkProxyPlayerCallBack = new IMKProxyPlayerCallBack() {
             @Override
             public void invoke(Pointer pUser, int err, String what, int sys_err) {
+                if (err == 0){
+                    System.out.println("代理播放成功");
+                }else{
+                    System.out.println("代理播放失败："+what);
+                }
+            }
+        };
+        ZLM_API.mk_proxy_player_set_on_play_result(mk_proxy,imkProxyPlayerCallBack , mk_proxy.getPointer(),null);
+        //回调关闭事件
+        IMKProxyPlayerCallBack imkProxyPlayCloseCallBack = new IMKProxyPlayerCallBack() {
+            @Override
+            public void invoke(Pointer pUser, int err, String what, int sys_err) {
+                System.out.println("拉流代理关闭");
                 //这里Pointer是ZLM维护的不需要我们释放 遵循谁申请谁释放原则
                 ZLM_API.mk_proxy_player_release(new MK_PROXY_PLAYER(pUser));
             }

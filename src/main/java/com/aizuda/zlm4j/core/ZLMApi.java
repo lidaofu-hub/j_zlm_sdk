@@ -378,9 +378,19 @@ public interface ZLMApi extends Library {
      * @param cb        回调指针
      * @param user_data 用户数据指针
      */
-    void mk_proxy_player_set_on_close(MK_PROXY_PLAYER ctx, IMKProxyPlayCloseCallBack cb, Pointer user_data);
+    void mk_proxy_player_set_on_close(MK_PROXY_PLAYER ctx, IMKProxyPlayerCallBack cb, Pointer user_data);
 
-    void mk_proxy_player_set_on_close2(MK_PROXY_PLAYER ctx, IMKProxyPlayCloseCallBack cb, Pointer user_data, IMKFreeUserDataCallBack user_data_free);
+    void mk_proxy_player_set_on_close2(MK_PROXY_PLAYER ctx, IMKProxyPlayerCallBack cb, Pointer user_data, IMKFreeUserDataCallBack user_data_free);
+
+
+    /**
+     * 设置代理第一次播放结果回调，如果第一次播放失败，可以认作是启动失败
+     * @param ctx 对象指针
+     * @param cb 回调指针
+     * @param user_data 用户数据指针
+     * @param user_data_free 用户数据释放回调
+     */
+    void  mk_proxy_player_set_on_play_result(MK_PROXY_PLAYER ctx, IMKProxyPlayerCallBack cb, Pointer user_data, IMKFreeUserDataCallBack user_data_free);
 
     /**
      * 获取总的观看人数

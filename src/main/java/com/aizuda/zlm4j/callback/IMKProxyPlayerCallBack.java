@@ -6,7 +6,7 @@ import com.sun.jna.Pointer;
 /**
  * MediaSource.close()回调事件
  */
-public interface IMKProxyPlayCloseCallBack extends Callback {
+public interface IMKProxyPlayerCallBack extends Callback {
     /**
      * MediaSource.close()回调事件
      * 在选择关闭一个关联的MediaSource时，将会最终触发到该回调
