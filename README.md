@@ -26,18 +26,19 @@ ZLMediaKit 项目的调用原始风格，各位网友可以参照 ZLMediaKit 原
 具体如何集成到项目可以参考[JMediaServer](https://gitee.com/daofuli/j_media_server)
 
 ## 😁版本更新
-- v1.1.1 拉取基于2024-06-10-master分支开发 1.增加拉流代理mk_proxy_player_set_on_play_result回调 2.修改IMKProxyPlayCloseCallBack=>IMKProxyPlayerCallBack
-- v1.1.0 拉取基于2024-06-03-master分支开发 1.增加Linux_aarch64支持
-- v1.0.9 拉取基于2024-06-03-master分支开发 1.同步ZLMediaKit滚动更新 2.增加Mac_arm64支持
+- v1.1.2 拉取基于2024-06-12-master分支编译开发 1.修复RTP单端口断言导致问题
+- v1.1.1 拉取基于2024-06-10-master分支编译开发 1.增加拉流代理mk_proxy_player_set_on_play_result回调 2.修改IMKProxyPlayCloseCallBack=>IMKProxyPlayerCallBack
+- v1.1.0 拉取基于2024-06-03-master分支编译开发 1.增加Linux_aarch64支持
+- v1.0.9 拉取基于2024-06-03-master分支编译开发 1.同步ZLMediaKit滚动更新 2.增加Mac_arm64支持
 - v1.0.8.1 修改支持jdk1.8
-- v1.0.8 拉取基于2024-05-29-master分支开发 增加拉流重试次数配置
-- v1.0.7 拉取基于2024-05-20-master分支开发 增加内存数据统计相关api及回调
-- v1.0.6 拉取基于2024-05-16-master分支开发 1.创建流增加x264编码库支持 2.创建流增加faac编码库支持
-- v1.0.5 拉取基于2024-05-10-master分支开发 1.增加on_record_ts回调 2.修改mk_mp4_info为mk_record_info
-- v1.0.4 拉取基于2024-05-07-master分支开发 1.增加rtc相关回调及函数
-- v1.0.3 拉取基于2024-04-02-master分支开发 1.增加MediaSource获取源地址 源类型 创建时间戳
-- v1.0.2 拉取基于2024-04-01-master分支开发 1.增加mac环境包 2.修改包名域
-- v1.0.1 拉取基于2024-02-05-master分支开发 增加拉流代理参数配置
+- v1.0.8 拉取基于2024-05-29-master分支编译开发 1.增加拉流重试次数配置
+- v1.0.7 拉取基于2024-05-20-master分支编译开发 1.增加内存数据统计相关api及回调
+- v1.0.6 拉取基于2024-05-16-master分支编译开发 1.创建流增加x264编码库支持 2.创建流增加faac编码库支持
+- v1.0.5 拉取基于2024-05-10-master分支编译开发 1.增加on_record_ts回调 2.修改mk_mp4_info为mk_record_info
+- v1.0.4 拉取基于2024-05-07-master分支编译开发 1.增加rtc相关回调及函数
+- v1.0.3 拉取基于2024-04-02-master分支编译开发 1.增加MediaSource获取源地址 源类型 创建时间戳
+- v1.0.2 拉取基于2024-04-01-master分支编译开发 1.增加mac环境包 2.修改包名域
+- v1.0.1 拉取基于2024-02-05-master分支编译开发 增加拉流代理参数配置
 - v1.0-SNAPSHOT (初始版本)拉取基于2023-11-23-master分支开发
 
 ## 😁SDK功能
@@ -196,7 +197,7 @@ public class Test {
         <dependency>
             <groupId>com.aizuda</groupId>
             <artifactId>zlm4j</artifactId>
-            <version>1.1.1</version>
+            <version>1.1.2</version>
         </dependency>
 ```
 
