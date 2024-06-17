@@ -26,6 +26,7 @@ ZLMediaKit 项目的调用原始风格，各位网友可以参照 ZLMediaKit 原
 具体如何集成到项目可以参考[JMediaServer](https://gitee.com/daofuli/j_media_server)
 
 ## 😁版本更新
+- v1.1.3 拉取基于2024-06-16-master分支编译开发 1.同步增加部分api 2.优化部分功能
 - v1.1.2 拉取基于2024-06-12-master分支编译开发 1.修复RTP单端口断言导致问题
 - v1.1.1 拉取基于2024-06-10-master分支编译开发 1.增加拉流代理mk_proxy_player_set_on_play_result回调 2.修改IMKProxyPlayCloseCallBack=>IMKProxyPlayerCallBack
 - v1.1.0 拉取基于2024-06-03-master分支编译开发 1.增加Linux_aarch64支持
@@ -191,13 +192,13 @@ public class Test {
 
 1. 可直接复制代码到自己的项目中，方便修改参数进行二次开发
 
-2. jar已发布到maven仓库，如需修改动态链接库请，拉取项目install，并把动态链接库放入对应的目录。
+2. jar已发布到maven重要仓库，如需修改动态链接库请拉取项目install，并把动态链接库放入对应的目录。
 
 ``` xml
         <dependency>
             <groupId>com.aizuda</groupId>
             <artifactId>zlm4j</artifactId>
-            <version>1.1.2</version>
+            <version>${lasted}</version>
         </dependency>
 ```
 

@@ -39,6 +39,7 @@ public interface ZLMApi extends Library {
 
     /**
      * 因 C API此函数被舍弃，此方法即将停用
+     *
      * @param thread_num
      * @param log_level
      * @param log_mask
@@ -51,7 +52,7 @@ public interface ZLMApi extends Library {
      * @param ssl_pwd
      */
     @Deprecated
-    default void mk_env_init1(int thread_num, int log_level, int log_mask, String log_file_path, int log_file_days, int ini_is_path, Pointer ini, int ssl_is_path, String ssl, String ssl_pwd){
+    default void mk_env_init1(int thread_num, int log_level, int log_mask, String log_file_path, int log_file_days, int ini_is_path, Pointer ini, int ssl_is_path, String ssl, String ssl_pwd) {
         mk_env_init2(thread_num, log_level, log_mask, log_file_path, log_file_days, ini_is_path, ini, ssl_is_path, ssl, ssl_pwd);
     }
 
@@ -332,10 +333,10 @@ public interface ZLMApi extends Library {
     /**
      * 创建一个代理播放器
      *
-     * @param vhost  虚拟主机名，一般为__defaultVhost__
-     * @param app    应用名
-     * @param stream 流名
-     * @param option ProtocolOption相关配置
+     * @param vhost       虚拟主机名，一般为__defaultVhost__
+     * @param app         应用名
+     * @param stream      流名
+     * @param option      ProtocolOption相关配置
      * @param retry_count 重试次数，当<0无限次重试
      * @return 对象指针
      */
@@ -385,12 +386,13 @@ public interface ZLMApi extends Library {
 
     /**
      * 设置代理第一次播放结果回调，如果第一次播放失败，可以认作是启动失败
-     * @param ctx 对象指针
-     * @param cb 回调指针
-     * @param user_data 用户数据指针
+     *
+     * @param ctx            对象指针
+     * @param cb             回调指针
+     * @param user_data      用户数据指针
      * @param user_data_free 用户数据释放回调
      */
-    void  mk_proxy_player_set_on_play_result(MK_PROXY_PLAYER ctx, IMKProxyPlayerCallBack cb, Pointer user_data, IMKFreeUserDataCallBack user_data_free);
+    void mk_proxy_player_set_on_play_result(MK_PROXY_PLAYER ctx, IMKProxyPlayerCallBack cb, Pointer user_data, IMKFreeUserDataCallBack user_data_free);
 
     /**
      * 获取总的观看人数
@@ -748,6 +750,21 @@ public interface ZLMApi extends Library {
     int mk_track_bit_rate(MK_TRACK track);
 
     /**
+     * 获取轨道是否准备好
+     */
+    int mk_track_ready(MK_TRACK track);
+
+    /**
+     * 获取累计帧数
+     */
+    long mk_track_frames(MK_TRACK track);
+
+    /**
+     * 获取时间
+     */
+    long mk_track_duration(MK_TRACK track);
+
+    /**
      * track是否为视频
      */
     int mk_track_is_video(MK_TRACK track);
@@ -766,6 +783,21 @@ public interface ZLMApi extends Library {
      * 获取视频帧率
      */
     int mk_track_video_fps(MK_TRACK track);
+
+    /**
+     * 获取视频累计关键帧数
+     */
+    long mk_track_video_key_frames(MK_TRACK track);
+
+    /**
+     * 获取视频GOP关键帧间隔
+     */
+    int mk_track_video_gop_size(MK_TRACK track);
+
+    /**
+     * 获取视频累计关键帧间隔(毫秒)
+     */
+    int mk_track_video_gop_interval_ms(MK_TRACK track);
 
     /**
      * 获取音频采样率
@@ -1169,6 +1201,9 @@ public interface ZLMApi extends Library {
     // copy track reference by index from MediaSource, please use mk_track_unref to release it
     MK_TRACK mk_media_source_get_track(MK_MEDIA_SOURCE ctx, int index);
 
+    // MediaSource::Track:loss
+    float mk_media_source_get_track_loss(MK_MEDIA_SOURCE ctx, MK_TRACK track);
+
     // MediaSource::broadcastMessage
     int mk_media_source_broadcast_msg(MK_MEDIA_SOURCE ctx, String msg, long len);
 
@@ -1178,11 +1213,21 @@ public interface ZLMApi extends Library {
     // MediaSource::getOriginType()
     int mk_media_source_get_origin_type(MK_MEDIA_SOURCE ctx);
 
+    // MediaSource::getOriginTypeStr()
+    String mk_media_source_get_origin_type_str(MK_MEDIA_SOURCE ctx);
+
     // MediaSource::getCreateStamp()
     long mk_media_source_get_create_stamp(MK_MEDIA_SOURCE ctx);
 
     // MediaSource::isRecording()
     int mk_media_source_is_recording(MK_MEDIA_SOURCE ctx, int type);
+
+    // MediaSource::getBytesSpeed()
+    int mk_media_source_get_bytes_speed(MK_MEDIA_SOURCE ctx);
+
+    // MediaSource::getAliveSecond()
+    long mk_media_source_get_alive_second(MK_MEDIA_SOURCE ctx);
+
 
     /**
      * 直播源在ZLMediaKit中被称作为MediaSource，
