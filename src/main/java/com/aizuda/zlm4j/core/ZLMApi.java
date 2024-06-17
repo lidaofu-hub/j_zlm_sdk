@@ -1208,13 +1208,13 @@ public interface ZLMApi extends Library {
     int mk_media_source_broadcast_msg(MK_MEDIA_SOURCE ctx, String msg, long len);
 
     // MediaSource::getOriginUrl()
-    String mk_media_source_get_origin_url(MK_MEDIA_SOURCE ctx);
+    Pointer mk_media_source_get_origin_url(MK_MEDIA_SOURCE ctx);
 
     // MediaSource::getOriginType()
     int mk_media_source_get_origin_type(MK_MEDIA_SOURCE ctx);
 
     // MediaSource::getOriginTypeStr()
-    String mk_media_source_get_origin_type_str(MK_MEDIA_SOURCE ctx);
+    Pointer mk_media_source_get_origin_type_str(MK_MEDIA_SOURCE ctx);
 
     // MediaSource::getCreateStamp()
     long mk_media_source_get_create_stamp(MK_MEDIA_SOURCE ctx);
