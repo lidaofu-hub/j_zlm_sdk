@@ -364,7 +364,7 @@ public interface ZLMApi extends Library {
      * 设置代理播放器配置选项
      *
      * @param ctx 代理播放器指针
-     * @param key 配置项键,支持 net_adapter/rtp_type/rtsp_user/rtsp_pwd/protocol_timeout_ms/media_timeout_ms/beat_interval_ms
+     * @param key 配置项键,支持 net_adapter/rtp_type/rtsp_user/rtsp_pwd/protocol_timeout_ms/media_timeout_ms/beat_interval_ms/rtsp_speed
      * @param val 配置项值,如果是整形，需要转换成统一转换成string
      */
     void mk_proxy_player_set_option(MK_PROXY_PLAYER ctx, String key, String val);
