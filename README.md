@@ -26,6 +26,7 @@ ZLMediaKit 项目的调用原始风格，各位网友可以参照 ZLMediaKit 原
 具体如何集成到项目可以参考[JMediaServer](https://gitee.com/daofuli/j_media_server)
 
 ## 😁版本更新
+- v1.1.5 拉取基于2024-07-10-master分支编译开发 1.同步ZLMediaKit滚动更新 2.增加添加RTP服务配置 vhost及app功能 3.增加获取http请求头信息列表
 - v1.1.4 拉取基于2024-06-28-master分支编译开发 1.同步ZLMediaKit滚动更新 2.增加RTSP回放流倍速配置
 - v1.1.3 拉取基于2024-06-16-master分支编译开发 1.同步增加部分api 2.优化部分功能
 - v1.1.2 拉取基于2024-06-12-master分支编译开发 1.修复RTP单端口断言导致问题

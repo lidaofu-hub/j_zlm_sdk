@@ -414,6 +414,8 @@ public interface ZLMApi extends Library {
      */
     MK_RTP_SERVER mk_rtp_server_create(short port, int tcp_mode, String stream_id);
 
+    MK_RTP_SERVER mk_rtp_server_create2(short port, int tcp_mode, String vhost, String app, String stream_id);
+
 
     /**
      * TCP 主动模式时连接到服务器
@@ -1149,6 +1151,9 @@ public interface ZLMApi extends Library {
 
     //Parser::Content(),获取HTTP body
     String mk_parser_get_content(MK_PARSER ctx, long length);
+
+    //循环获取所有header
+    void mk_parser_headers_for_each(MK_PARSER ctx, IMKParserHeaderCallBack cb, Pointer user_data);
 
     ///////////////////////////////////////////MediaInfo/////////////////////////////////////////////
 //MediaInfo对象的C映射
