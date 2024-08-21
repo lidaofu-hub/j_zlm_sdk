@@ -26,6 +26,7 @@ ZLMediaKit 项目的调用原始风格，各位网友可以参照 ZLMediaKit 原
 具体如何集成到项目可以参考[JMediaServer](https://gitee.com/daofuli/j_media_server)
 
 ## 😁版本更新
+- v1.1.7 拉取基于2024-08-14-master分支编译开发 1.同步ZLMediaKit滚动更新
 - v1.1.6 拉取基于2024-07-28-master分支编译开发 1.同步ZLMediaKit滚动更新 2.增加GB28181模式，支持TCP/UDP主动被动
 - v1.1.5 拉取基于2024-07-10-master分支编译开发 1.同步ZLMediaKit滚动更新 2.增加添加RTP服务配置 vhost及app功能 3.增加获取http请求头信息列表
 - v1.1.4 拉取基于2024-06-28-master分支编译开发 1.同步ZLMediaKit滚动更新 2.增加RTSP回放流倍速配置
@@ -204,6 +205,17 @@ public class Test {
             <version>${lasted}</version>
         </dependency>
 ```
+
+## 😁鸣谢
+同时感谢JetBrains对开源项目的支持，本项目使用CLion/IDEA开发与调试：
+ <p align="left">
+  <a >
+   <img alt="zlm4j-qun" src="doc/images/clion.png" width="350px">
+    <img alt="zlm4j-qun" src="doc/images/idea.png" width="350px">
+  </a>
+</p>
+
+
 
 ## 😁常见问题
 
