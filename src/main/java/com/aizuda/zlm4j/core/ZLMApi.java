@@ -687,13 +687,17 @@ public interface ZLMApi extends Library {
      * @param dst_url   目标ip或域名
      * @param dst_port  目标端口
      * @param ssrc      rtp的ssrc，10进制的字符串打印
-     * @param con_type 0: tcp主动，1：udp主动，2：tcp被动，3：udp被动
+     * @param con_type  0: tcp主动，1：udp主动，2：tcp被动，3：udp被动
      * @param cb        启动成功或失败回调
      * @param user_data 回调用户指针
      */
     void mk_media_start_send_rtp(MK_MEDIA ctx, String dst_url, short dst_port, String ssrc, int con_type, IMKSourceSendRtpResultCallBack cb, Pointer user_data);
 
     void mk_media_start_send_rtp2(MK_MEDIA ctx, String dst_url, short dst_port, String ssrc, int con_type, IMKSourceSendRtpResultCallBack cb, Pointer user_data, IMKFreeUserDataCallBack user_data_free);
+
+    void mk_media_start_send_rtp3(MK_MEDIA ctx, String dst_url, short dst_port, String ssrc, int con_type, MK_INI options, IMKSourceSendRtpResultCallBack cb, Pointer user_data);
+
+    void mk_media_start_send_rtp4(MK_MEDIA ctx, String dst_url, short dst_port, String ssrc, int con_type, MK_INI options, IMKSourceSendRtpResultCallBack cb, Pointer user_data, IMKFreeUserDataCallBack user_data_free);
 
     /**
      * 停止某路或全部ps-rtp发送，此api线程安全
@@ -1262,6 +1266,10 @@ public interface ZLMApi extends Library {
     void mk_media_source_start_send_rtp(MK_MEDIA_SOURCE ctx, String dst_url, short dst_port, String ssrc, int con_type, IMKSourceSendRtpResultCallBack cb, Pointer user_data);
 
     void mk_media_source_start_send_rtp2(MK_MEDIA_SOURCE ctx, String dst_url, short dst_port, String ssrc, int con_type, IMKSourceSendRtpResultCallBack cb, Pointer user_data, IMKFreeUserDataCallBack user_data_free);
+
+    void mk_media_source_start_send_rtp3(MK_MEDIA_SOURCE ctx, String dst_url, short dst_port, String ssrc, int con_type, MK_INI options, IMKSourceSendRtpResultCallBack cb, Pointer user_data);
+
+    void mk_media_source_start_send_rtp4(MK_MEDIA_SOURCE ctx, String dst_url, short dst_port, String ssrc, int con_type, MK_INI options, IMKSourceSendRtpResultCallBack cb, Pointer user_data, IMKFreeUserDataCallBack user_data_free);
 
     //MediaSource::stopSendRtp，请参考mk_media_stop_send_rtp,注意ctx参数类型不一样
     int mk_media_source_stop_send_rtp(MK_MEDIA_SOURCE ctx);
