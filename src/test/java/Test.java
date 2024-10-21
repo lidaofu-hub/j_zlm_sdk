@@ -22,7 +22,7 @@ public class Test {
 
     public static void main(String[] args) throws InterruptedException {
         //初始化sdk配置
-        ZLM_API.mk_env_init2(1, 1, 1, null, 0, 0, null, 0, null, null);
+        ZLM_API.mk_env_init2(8, 1, 1, null, 0, 0, null, 0, null, null);
         //初始化环境配置
         MK_INI mkIni = ZLM_API.mk_ini_default();
         //配置参数 全部配置参数及说明见(resources/conf.ini) 打开自动关流 对应conf.ini中配置[protocol]

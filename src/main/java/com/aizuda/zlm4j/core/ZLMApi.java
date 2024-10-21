@@ -651,7 +651,7 @@ public interface ZLMApi extends Library {
     void mk_media_set_on_pause2(MK_MEDIA ctx, IMKPauseEventCallBack cb, Pointer user_data, IMKFreeUserDataCallBack user_data_free);
 
     /**
-     * 监听播放器pause请求事件
+     * 监听播放器speed请求事件
      *
      * @param ctx       对象指针
      * @param cb        回调指针
@@ -1616,4 +1616,44 @@ public interface ZLMApi extends Library {
      * @param ini 存放统计结果
      */
     void mk_get_statistic(IMKGetStatisticCallBack cb, Pointer user_data, IMKFreeUserDataCallBack free_cb);
+
+    /**
+     * 创建h264分帧器
+     *
+     * @param cb 分帧回调函数
+     * @param user_data 回调用户数据指针
+     * @param is_h265 是否是265
+     * @return 分帧器对象
+     */
+    MK_H264_SPLITTER  mk_h264_splitter_create(IMKH264SplitterFrame cb, Pointer user_data, int is_h265);
+    MK_H264_SPLITTER  mk_h264_splitter_create2(IMKH264SplitterFrame cb, Pointer user_data, IMKFreeUserDataCallBack user_data_free, int is_h265);
+
+    /**
+     * 删除h264分帧器
+     *
+     * @param ctx 分帧器
+     */
+    void  mk_h264_splitter_release(MK_H264_SPLITTER ctx);
+
+    /**
+     * 输入数据并分帧
+     *
+     * @param ctx 分帧器
+     * @param data h264/h265数据
+     * @param size 数据长度
+     */
+    void  mk_h264_splitter_input_data(MK_H264_SPLITTER ctx, Pointer data, int size);
+
+
+    /**
+     * 加载mp4
+     * @param vhost 虚拟主机
+     * @param app app
+     * @param stream 流id
+     * @param file_path 文件路径
+     * @param file_repeat 循环解复用
+     * @param ini 配置
+     */
+    void  mk_load_mp4_file(String vhost, String app, String stream, String file_path, int file_repeat);
+    void  mk_load_mp4_file2(String vhost, String app, String stream, String file_path, int file_repeat,MK_INI ini);
 }
