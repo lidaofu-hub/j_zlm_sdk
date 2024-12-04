@@ -3,6 +3,7 @@ import com.aizuda.zlm4j.core.ZLMApi;
 import com.aizuda.zlm4j.structure.MK_EVENTS;
 import com.aizuda.zlm4j.structure.MK_INI;
 import com.aizuda.zlm4j.structure.MK_PROXY_PLAYER;
+import com.sun.jna.Memory;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 
@@ -25,7 +26,7 @@ public class Test {
         ZLM_API.mk_env_init2(8, 1, 1, null, 0, 0, null, 0, null, null);
         //初始化环境配置
         MK_INI mkIni = ZLM_API.mk_ini_default();
-        //配置参数 全部配置参数及说明见(resources/conf.ini) 打开自动关流 对应conf.ini中配置[protocol]
+        //配置参数 全部配置参数及说明见(resources/conf_zh.ini) 打开自动关流 对应conf.ini中配置[protocol]
         ZLM_API.mk_ini_set_option(mkIni, "general.mediaServerId", "JMediaServer");
         ZLM_API.mk_ini_set_option(mkIni, "http.notFound", "<h1 style=\"text-align:center;\">Media Server V1.0 By LiDaoFu</h1>");
         ZLM_API.mk_ini_set_option_int(mkIni, "protocol.auto_close", 0);
