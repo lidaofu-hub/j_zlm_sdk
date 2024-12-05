@@ -6,7 +6,7 @@
 
     <groupId>com.aizuda</groupId>
     <artifactId>zlm4j</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
     <name>zlm4j</name>
     <packaging>jar</packaging>
     <url>https://gitee.com/aizuda/zlm4j</url>
