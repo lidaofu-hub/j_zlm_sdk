@@ -135,7 +135,6 @@ public class Test {
                     System.out.println("代理播放成功");
                 }else{
                     System.out.println("代理播放失败："+what);
-                    ZLM_API.mk_proxy_player_release(new MK_PROXY_PLAYER(pUser));
                 }
             }
         };
