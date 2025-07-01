@@ -26,6 +26,7 @@ ZLMediaKit 项目的调用原始风格，各位网友可以参照 ZLMediaKit 原
 具体如何集成到项目可以参考[JMediaServer](https://gitee.com/daofuli/j_media_server)
 
 ## 😁版本更新
+- v1.4.0 拉取基于2025-6-30-master分支编译开发 1.修复优化部分功能
 - v1.3.0 拉取基于2025-5-11-master分支编译开发 1.修改部分编译GLIB版本
 - v1.2.6 拉取基于2025-5-11-master分支编译开发 1.修复优化部分功能
 - v1.2.5 拉取基于2025-03-29-master分支编译开发 1.修复优化部分功能
@@ -233,7 +234,7 @@ public class Test {
 
 1. 可直接复制代码到自己的项目中，方便修改参数进行二次开发
 
-2. jar已发布到maven重要仓库，如需修改动态链接库请拉取项目install，并把动态链接库放入对应的目录。
+2. jar已发布到maven中央仓库，如需修改动态链接库请拉取项目install，并把动态链接库放入对应的目录。
 
 ``` xml
         <dependency>
