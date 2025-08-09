@@ -410,11 +410,15 @@ public interface ZLMApi extends Library {
      * @param port      监听端口，0则为随机
      * @param tcp_mode  tcp模式(0: 不监听端口 1: 监听端口 2: 主动连接到服务端)
      * @param stream_id 该端口绑定的流id
+     * @param app 关联的app
+     * @param multiplex 是否开启rtp复用 0: 不开启 1: 开启
      * @return
      */
     MK_RTP_SERVER mk_rtp_server_create(short port, int tcp_mode, String stream_id);
 
     MK_RTP_SERVER mk_rtp_server_create2(short port, int tcp_mode, String vhost, String app, String stream_id);
+
+    MK_RTP_SERVER mk_rtp_server_create3(short port, int tcp_mode, String vhost, String app, String stream_id,int multiplex);
 
 
     /**
@@ -446,6 +450,14 @@ public interface ZLMApi extends Library {
      */
     short mk_rtp_server_port(MK_RTP_SERVER ctx);
 
+    /**
+     * 更新RTP服务器过滤SSRC
+     * @param ctx 服务器对象
+     * @param ssrc 十进制ssrc
+     *
+     */
+    void mk_rtp_server_update_ssrc(MK_RTP_SERVER ctx,int ssrc);
+
 
     /**
      * 监听B28181 RTP 服务器接收流超时事件
@@ -458,6 +470,34 @@ public interface ZLMApi extends Library {
     void mk_rtp_server_set_on_detach(MK_RTP_SERVER ctx, IMKRtpServerDetachCallBack cb, Pointer user_data);
 
     void mk_rtp_server_set_on_detach2(MK_RTP_SERVER ctx, IMKRtpServerDetachCallBack cb, Pointer user_data, IMKFreeUserDataCallBack user_data_free);
+
+
+
+    /**
+     * 获取rtp推流信息
+     * @param app 应用名
+     * @param stream 流id
+     * @param cb rtp信息获取回调
+     *
+     */
+    void mk_rtp_get_info(String app,String stream, IMKRtpGetInfoCallBack cb);
+
+    /**
+     * 暂停RTP超时检查
+     * @param app 应用名
+     * @param stream 流id
+     *
+     */
+    void mk_rtp_pause_check(String app,String stream);
+
+    /**
+     * 恢复RTP超时检查
+     * @param app 应用名
+     * @param stream 流id
+     *
+     */
+    void mk_rtp_resume_check(String app,String stream);
+
 
     /*******************************播放相关**********************************/
     /**
@@ -1082,6 +1122,18 @@ public interface ZLMApi extends Library {
      * @return 1代表成功，0代表失败
      */
     int mk_recorder_start(int type, String vhost, String app, String stream, String customized_path, long max_second);
+
+    /**
+     *
+     * @param vhost
+     * @param app
+     * @param stream
+     * @param path
+     * @param back_ms
+     * @param forward_ms
+     * @return
+     */
+    int mk_recorder_start_task(String vhost, String app, String stream, String path, int back_ms, int forward_ms);
 
     /**
      * 停止录制
