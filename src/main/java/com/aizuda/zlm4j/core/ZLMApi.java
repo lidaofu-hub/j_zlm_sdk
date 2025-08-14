@@ -1310,6 +1310,8 @@ public interface ZLMApi extends Library {
     //MediaSource::seekTo()
     int mk_media_source_seek_to(MK_MEDIA_SOURCE ctx, int stamp);
 
+    void  mk_media_source_set_speed(MK_MEDIA_SOURCE ctx, float speed);
+
     /**
      * rtp推流成功与否的回调(第一次成功后，后面将一直重试)
      */
