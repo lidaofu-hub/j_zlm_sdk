@@ -256,6 +256,24 @@ public interface ZLMApi extends Library {
 
 
     /**
+     * 创建websocket[s]信令服务器
+     *
+     * @param port websocket监听端口
+     * @param ssl  是否为ssl类型服务器
+     * @return 0:失败,非0:端口号
+     */
+    short mk_signaling_server_start(short port,int ssl);
+
+    /**
+     * 创建ice服务器
+     *
+     * @param port ice监听端口
+     * @return 0:失败,非0:端口号
+     */
+    short mk_ice_server_start(short port);
+
+
+    /**
      * webrtc交换sdp，根据offer sdp生成answer sdp
      *
      * @param user_data 回调用户指针
@@ -267,6 +285,51 @@ public interface ZLMApi extends Library {
     void mk_webrtc_get_answer_sdp(Pointer user_data, IMKWebRtcGetAnwerSdpCallBack cb, String type, String offer, String url);
 
     void mk_webrtc_get_answer_sdp2(Pointer user_data, IMKFreeUserDataCallBack user_data_free, IMKWebRtcGetAnwerSdpCallBack cb, String type, String offer, String url);
+
+    /**
+     * 获取webrtc proxy player 信息
+     *
+     * @param ctx
+     * @param cb
+     */
+    void mk_webrtc_get_proxy_player_info(MK_PROXY_PLAYER ctx, IMKWebRtcGetProxyPlayerInfoCallBack cb);
+
+    /**
+     * WebRTC-注册到信令服务器
+     *
+     * @param server_host 信令服务器host
+     * @param server_port 信令服务器port
+     * @param room_id     房间id
+     * @param ssl         是否启用ssl
+     * @param cb          回调函数
+     */
+    void mk_webrtc_add_room_keeper(String room_id,String server_host, short server_port, int ssl,IMKWebRtcRoomKeeperInfoCallBack cb,Pointer user_data);
+
+    void mk_webrtc_add_room_keeper2(String room_id,String server_host, short server_port, int ssl,IMKWebRtcRoomKeeperInfoCallBack cb,Pointer user_data,IMKFreeUserDataCallBack user_data_free);
+
+    /**
+     * WebRTC-从信令服务器注销
+     *
+     * @param room_key 房间key
+     * @param cb       回调函数
+     */
+    void mk_webrtc_del_room_keeper(String room_key, IMKWebRtcRoomKeeperInfoCallBack cb,Pointer user_data);
+
+    void mk_webrtc_del_room_keeper2(String room_key, IMKWebRtcRoomKeeperInfoCallBack cb,Pointer user_data,IMKFreeUserDataCallBack user_data_free);
+
+    /**
+     * WebRTC-Peer查看注册信息
+     *
+     * @param cb 回调函数
+     */
+    void mk_webrtc_list_room_keeper(IMKWebRtcRoomKeeperDataCallBack cb);
+
+    /**
+     * WebRTC-信令服务器查看注册信息
+     *
+     * @param cb 回调函数
+     */
+    void mk_webrtc_list_rooms(IMKWebRtcRoomKeeperDataCallBack cb);
 
     /**
      * 创建srt服务器
