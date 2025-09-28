@@ -6,7 +6,7 @@
 
     <groupId>com.aizuda</groupId>
     <artifactId>zlm4j</artifactId>
-    <version>1.6.0</version>
+    <version>1.6.1</version>
     <name>zlm4j</name>
     <packaging>jar</packaging>
     <url>https://gitee.com/aizuda/zlm4j</url>
@@ -27,7 +27,7 @@
         <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna</artifactId>
-            <version>5.14.0</version>
+            <version>5.18.0</version>
         </dependency>
     </dependencies>
 
