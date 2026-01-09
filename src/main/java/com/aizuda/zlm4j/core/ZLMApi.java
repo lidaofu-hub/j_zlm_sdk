@@ -262,7 +262,7 @@ public interface ZLMApi extends Library {
      * @param ssl  是否为ssl类型服务器
      * @return 0:失败,非0:端口号
      */
-    short mk_signaling_server_start(short port,int ssl);
+    short mk_signaling_server_start(short port, int ssl);
 
     /**
      * 创建ice服务器
@@ -303,9 +303,9 @@ public interface ZLMApi extends Library {
      * @param ssl         是否启用ssl
      * @param cb          回调函数
      */
-    void mk_webrtc_add_room_keeper(String room_id,String server_host, short server_port, int ssl,IMKWebRtcRoomKeeperInfoCallBack cb,Pointer user_data);
+    void mk_webrtc_add_room_keeper(String room_id, String server_host, short server_port, int ssl, IMKWebRtcRoomKeeperInfoCallBack cb, Pointer user_data);
 
-    void mk_webrtc_add_room_keeper2(String room_id,String server_host, short server_port, int ssl,IMKWebRtcRoomKeeperInfoCallBack cb,Pointer user_data,IMKFreeUserDataCallBack user_data_free);
+    void mk_webrtc_add_room_keeper2(String room_id, String server_host, short server_port, int ssl, IMKWebRtcRoomKeeperInfoCallBack cb, Pointer user_data, IMKFreeUserDataCallBack user_data_free);
 
     /**
      * WebRTC-从信令服务器注销
@@ -313,9 +313,9 @@ public interface ZLMApi extends Library {
      * @param room_key 房间key
      * @param cb       回调函数
      */
-    void mk_webrtc_del_room_keeper(String room_key, IMKWebRtcRoomKeeperInfoCallBack cb,Pointer user_data);
+    void mk_webrtc_del_room_keeper(String room_key, IMKWebRtcRoomKeeperInfoCallBack cb, Pointer user_data);
 
-    void mk_webrtc_del_room_keeper2(String room_key, IMKWebRtcRoomKeeperInfoCallBack cb,Pointer user_data,IMKFreeUserDataCallBack user_data_free);
+    void mk_webrtc_del_room_keeper2(String room_key, IMKWebRtcRoomKeeperInfoCallBack cb, Pointer user_data, IMKFreeUserDataCallBack user_data_free);
 
     /**
      * WebRTC-Peer查看注册信息
@@ -473,7 +473,7 @@ public interface ZLMApi extends Library {
      * @param port      监听端口，0则为随机
      * @param tcp_mode  tcp模式(0: 不监听端口 1: 监听端口 2: 主动连接到服务端)
      * @param stream_id 该端口绑定的流id
-     * @param app 关联的app
+     * @param app       关联的app
      * @param multiplex 是否开启rtp复用 0: 不开启 1: 开启
      * @return
      */
@@ -481,7 +481,7 @@ public interface ZLMApi extends Library {
 
     MK_RTP_SERVER mk_rtp_server_create2(short port, int tcp_mode, String vhost, String app, String stream_id);
 
-    MK_RTP_SERVER mk_rtp_server_create3(short port, int tcp_mode, String vhost, String app, String stream_id,int multiplex);
+    MK_RTP_SERVER mk_rtp_server_create3(short port, int tcp_mode, String vhost, String app, String stream_id, int multiplex);
 
 
     /**
@@ -515,11 +515,12 @@ public interface ZLMApi extends Library {
 
     /**
      * 更新RTP服务器过滤SSRC
-     * @param ctx 服务器对象
+     *
+     * @param ctx  服务器对象
      * @param ssrc 十进制ssrc
      *
      */
-    void mk_rtp_server_update_ssrc(MK_RTP_SERVER ctx,int ssrc);
+    void mk_rtp_server_update_ssrc(MK_RTP_SERVER ctx, int ssrc);
 
 
     /**
@@ -535,31 +536,33 @@ public interface ZLMApi extends Library {
     void mk_rtp_server_set_on_detach2(MK_RTP_SERVER ctx, IMKRtpServerDetachCallBack cb, Pointer user_data, IMKFreeUserDataCallBack user_data_free);
 
 
-
     /**
      * 获取rtp推流信息
-     * @param app 应用名
+     *
+     * @param app    应用名
      * @param stream 流id
-     * @param cb rtp信息获取回调
+     * @param cb     rtp信息获取回调
      *
      */
-    void mk_rtp_get_info(String app,String stream, IMKRtpGetInfoCallBack cb);
+    void mk_rtp_get_info(String app, String stream, IMKRtpGetInfoCallBack cb);
 
     /**
      * 暂停RTP超时检查
-     * @param app 应用名
+     *
+     * @param app    应用名
      * @param stream 流id
      *
      */
-    void mk_rtp_pause_check(String app,String stream);
+    void mk_rtp_pause_check(String app, String stream);
 
     /**
      * 恢复RTP超时检查
-     * @param app 应用名
+     *
+     * @param app    应用名
      * @param stream 流id
      *
      */
-    void mk_rtp_resume_check(String app,String stream);
+    void mk_rtp_resume_check(String app, String stream);
 
 
     /*******************************播放相关**********************************/
@@ -1373,7 +1376,7 @@ public interface ZLMApi extends Library {
     //MediaSource::seekTo()
     int mk_media_source_seek_to(MK_MEDIA_SOURCE ctx, int stamp);
 
-    void  mk_media_source_set_speed(MK_MEDIA_SOURCE ctx, float speed);
+    void mk_media_source_set_speed(MK_MEDIA_SOURCE ctx, float speed);
 
     /**
      * rtp推流成功与否的回调(第一次成功后，后面将一直重试)
@@ -1670,6 +1673,49 @@ public interface ZLMApi extends Library {
      */
     int mk_frame_get_flags(MK_FRAME frame);
 
+    /**
+     * 创建帧合并器
+     *
+     * @param type 起始头类型，0: none, 1: h264_prefix/AnnexB(0x 00 00 00 01), 2: mp4_nal_size(avcC)
+     * @param type Starting header type, 0: none, 1: h264_prefix/AnnexB(0x 00 00 00 01), 2: mp4_nal_size(avcC)
+     * @return 帧合并器
+     */
+    MK_FRAME_MERGER mk_frame_merger_create(int type);
+
+    /**
+     * 销毁帧合并器
+     *
+     * @param ctx 对象指针
+     *            Destroy the frame merger.
+     * @param ctx Object pointer.
+     *            <p>
+     *            [AUTO-TRANSLATED:0c9aad7b]
+     */
+    void mk_frame_merger_release(MK_FRAME_MERGER ctx);
+
+    /**
+     * 清空merger对象缓冲，方便复用
+     *
+     * @param ctx 对象指针
+     */
+    void mk_frame_merger_clear(MK_FRAME_MERGER ctx);
+
+    /**
+     * 输入frame到merger对象并合并
+     *
+     * @param ctx       对象指针
+     * @param frame     帧数据
+     * @param cb        帧合并回调函数
+     * @param user_data 帧合并回调函数用户数据指针
+     */
+    void mk_frame_merger_input(MK_FRAME_MERGER ctx, MK_FRAME frame, IMKFrameMergerCallBack cb, Pointer user_data);
+
+    /**
+     * 强制flush merger对象缓冲，调用此api前需要确保先调用mk_frame_merger_input函数并且回调参数有效
+     *
+     * @param ctx 对象指针
+     */
+    void mk_frame_merger_flush(MK_FRAME_MERGER ctx);
 
     /**
      * 删除mpeg-ps/ts 打包器
