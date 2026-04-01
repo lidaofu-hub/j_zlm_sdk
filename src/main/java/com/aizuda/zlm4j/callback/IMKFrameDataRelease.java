@@ -1,5 +1,6 @@
 package com.aizuda.zlm4j.callback;
 
+import com.sun.jna.Callback;
 import com.sun.jna.Pointer;
 
 /**
@@ -8,7 +9,7 @@ import com.sun.jna.Pointer;
  * @author lidaofu
  * @since 2023/12/12
  **/
-public interface IMKFrameDataRelease {
+public interface IMKFrameDataRelease  extends Callback {
 
     /**
      * 用户自定义free回调函数

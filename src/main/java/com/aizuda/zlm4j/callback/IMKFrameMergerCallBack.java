@@ -1,6 +1,7 @@
 package com.aizuda.zlm4j.callback;
 
 import com.aizuda.zlm4j.structure.MK_BUFFER;
+import com.sun.jna.Callback;
 import com.sun.jna.Pointer;
 
 /**
@@ -13,7 +14,7 @@ import com.sun.jna.Pointer;
  * @param have_key_frame 合并后数据中是否包含关键帧
  *                       [AUTO-TRANSLATED:ff78df4f]
  */
-public interface IMKFrameMergerCallBack {
+public interface IMKFrameMergerCallBack  extends Callback {
 
     /**
      * 合并帧回调函数
